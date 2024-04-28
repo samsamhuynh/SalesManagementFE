@@ -1,7 +1,7 @@
-import Welcome from "./components/Welcome";
+import Layout from "./layouts";
 
-export default function App() {
-  return (
-<Welcome />
-  );
-}
+const App = () => {
+  return <Layout />;
+};
+
+export default App;
