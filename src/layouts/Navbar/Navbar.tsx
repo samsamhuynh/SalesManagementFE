@@ -1,20 +1,35 @@
+import { Menu } from "@mui/icons-material";
+import { AppBar, Hidden, IconButton, Toolbar } from "@mui/material";
 import PropTypes from "prop-types";
-import { AppBar, Toolbar, IconButton, Button, Hidden } from "@mui/material";
-
-import MenuIcon from "@mui/icons-material/Menu";
+import "./../../index.css";
+import AdminNavbarLinks from "./AdminNavbarLink";
 
 const Header = (props: any) => {
+  const { color, handleDrawerToggle } = props;
+  const appBarClasses = color ? ` ${color}` : " ";
+
   return (
-    <AppBar className="">
-      <Toolbar>
-        <Hidden implementation="css"></Hidden>
-        <Hidden implementation="css">
+    <AppBar
+      color="transparent"
+      elevation={0}
+      position="absolute"
+      className={
+        "mb-0 py-2.5 w-full min-h-12 z-40 text-gray-800 transition-all duration-150 ease  block" +
+        appBarClasses
+      }
+    >
+      <Toolbar className="min-h-12 px-2.5 ml-auto">
+        <Hidden mdDown implementation="css">
+          <AdminNavbarLinks />
+        </Hidden>
+
+        <Hidden mdUp implementation="css">
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={props.handleDrawerToggle}
+            onClick={handleDrawerToggle}
           >
-            <MenuIcon />
+            <Menu />
           </IconButton>
         </Hidden>
       </Toolbar>
@@ -24,7 +39,9 @@ const Header = (props: any) => {
 
 Header.propTypes = {
   color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
+  rtlActive: PropTypes.bool,
   handleDrawerToggle: PropTypes.func,
+  routes: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Header;

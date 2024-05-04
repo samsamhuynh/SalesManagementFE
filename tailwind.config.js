@@ -1,0 +1,72 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {},
+    // screens: {
+    //   sm: "640px",
+    //   md: "768px",
+    //   lg: "1024px",
+    //   xl: "1280px",
+    //   "2xl": "1536px",
+    // },
+    colors: () => ({
+      inherit: "inherit",
+      current: "currentColor",
+      transparent: "transparent",
+      black: "#000",
+      white: "#FFF",
+      primary: {
+        100: "#9c27b0",
+        200: "#ab47bc",
+        300: "#8e24aa",
+        400: "#af2cc5",
+      },
+      warning: {
+        100: "#ff9800",
+        200: "#ffa726",
+        300: "#fb8c00",
+        400: "#ffa21a",
+      },
+      danger: {
+        100: "#f44336",
+        200: "#ef5350",
+        300: "#e53935",
+        400: "#f55a4e",
+      },
+      success: {
+        100: "#4caf50",
+        200: "#66bb6a",
+        300: "#43a047",
+        400: "#5cb860",
+      },
+      info: {
+        100: "#00acc1",
+        200: "#26c6da",
+        300: "#00acc1",
+        400: "#00d3ee",
+      },
+      rose: {
+        100: "#e91e63",
+        200: "#ec407a",
+        300: "#d81b60",
+        400: "#eb3573",
+      },
+      gray: {
+        100: "#999",
+        200: "#777",
+        300: "#3C4858",
+        400: "#AAAAAA",
+        500: "#D2D2D2",
+        600: "#DDD",
+        700: "#b4b4b4",
+        800: "#555555",
+        900: "#333",
+        1000: "#a9afbb",
+        1100: "#eee",
+        1200: "#e7e7e7",
+      },
+    }),
+  },
+  plugins: [],
+};

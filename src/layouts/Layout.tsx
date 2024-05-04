@@ -1,13 +1,15 @@
-import { useEffect, useRef, useState } from "react";
 import Footer from "./Footer";
-import Navbar from "./Navbar";
+import Header from "./Navbar";
 import Sidebar from "./Sidebar";
+import "./../index.css";
+import { useEffect, useRef, useState } from "react";
+import PerfectScrollbar from "perfect-scrollbar";
 import bgImage from "./../assets/image/sidebar.jpg";
 import logo from "./../assets/image/reactlogo.jpg";
-import PerfectScrollbar from "perfect-scrollbar";
-import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 const Layout = ({ ...rest }) => {
+  const [image] = useState(bgImage);
+  const [color] = useState("blue");
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -36,29 +38,34 @@ const Layout = ({ ...rest }) => {
 
     window.addEventListener("resize", resizeFunction);
 
-    // Cleanup function cho useEffect
+    // Specify how to clean up after this effect:
     return () => {
       if (navigator.platform.indexOf("Win") > -1 && ps) {
-        ps.destroy(); // Hủy bỏ instance của PerfectScrollbar khi component unmount
+        ps.destroy();
       }
       window.removeEventListener("resize", resizeFunction);
     };
   }, [mainPanel]);
 
   return (
-    <div>
+    <div className="relative top-0 h-screen">
       <Sidebar
         logoText={"Online School"}
         logo={logo}
-        image={bgImage}
+        image={image}
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
-        bgColor={"blue"}
+        color={color}
         {...rest}
       />
-      <div ref={mainPanel}>
-        <Navbar handleDrawerToggle={handleDrawerToggle} {...rest} />
+      <div
+        className="relative w-full max-h-full transitionLayout"
+        ref={mainPanel}
+      >
+        <Header handleDrawerToggle={handleDrawerToggle} {...rest} />
+      </div>
 
+      <div>
         <Footer />
       </div>
     </div>
