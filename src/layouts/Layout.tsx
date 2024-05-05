@@ -1,7 +1,7 @@
 import Footer from "./Footer";
 import Header from "./Navbar";
 import Sidebar from "./Sidebar";
-import "./../index.css";
+import "./../index.scss";
 import { useEffect, useRef, useState } from "react";
 import PerfectScrollbar from "perfect-scrollbar";
 import bgImage from "./../assets/image/sidebar.jpg";
@@ -19,13 +19,12 @@ const Layout = ({ ...rest }) => {
   const mainPanel = useRef<HTMLDivElement | null>(null);
 
   const resizeFunction = () => {
-    if (window.innerWidth >= 960) {
+    if (window.innerWidth >= 900) {
       setMobileOpen(false);
     }
   };
-  // initialize and destroy the PerfectScrollbar plugin
   useEffect(() => {
-    let ps: PerfectScrollbar | null = null; // Biến lưu trữ instance của PerfectScrollbar
+    let ps: PerfectScrollbar | null = null;
     if (navigator.platform.indexOf("Win") > -1) {
       if (mainPanel.current) {
         ps = new PerfectScrollbar(mainPanel.current, {

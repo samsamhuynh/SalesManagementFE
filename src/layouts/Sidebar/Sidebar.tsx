@@ -7,7 +7,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import "./../../index.css";
+import "./../../index.scss";
 import { NavLink } from "react-router-dom";
 import {
   BubbleChart,
@@ -72,14 +72,14 @@ const Sidebar = (props: any) => {
   const links = (
     <List className="mt-5 py-0 pl-0 mb-0 list-none static">
       {menu.map((prop: any, key: any) => {
-        const activePro = prop.path === "/upgrade-to-pro" ? "activePro " : "";
+        const activePro = prop.path === "/upgrade-to-pro" ? "activePro " : " ";
         const listItemClasses =
           prop.path === "/upgrade-to-pro"
             ? color
             : activeRoute(prop.path)
             ? color
-            : "";
-        const whiteFontClasses = activeRoute(prop.path) ? "whiteFont" : "";
+            : " ";
+        const whiteFontClasses = activeRoute(prop.path) ? "whiteFont" : " ";
         return (
           <NavLink
             style={({ isActive }) => {
@@ -174,6 +174,7 @@ const Sidebar = (props: any) => {
           ) : null}
         </Drawer>
       </Hidden>
+
       <Hidden mdDown implementation="css">
         <Drawer
           variant="permanent"
@@ -204,7 +205,7 @@ Sidebar.propTypes = {
   logoText: PropTypes.string,
   open: PropTypes.bool,
   bgColor: PropTypes.oneOf(["purple", "blue", "green", "orange", "red"]),
-  color: PropTypes.string,
+  color: PropTypes.oneOf(["purple", "blue", "green", "orange", "red"]),
 };
 
 export default Sidebar;

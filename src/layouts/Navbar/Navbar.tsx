@@ -1,7 +1,7 @@
 import { Menu } from "@mui/icons-material";
 import { AppBar, Hidden, IconButton, Toolbar } from "@mui/material";
 import PropTypes from "prop-types";
-import "./../../index.css";
+import "./../../index.scss";
 import AdminNavbarLinks from "./AdminNavbarLink";
 
 const Header = (props: any) => {
@@ -14,7 +14,7 @@ const Header = (props: any) => {
       elevation={0}
       position="absolute"
       className={
-        "mb-0 py-2.5 w-full min-h-12 z-40 text-gray-800 transition-all duration-150 ease  block" +
+        "mb-0 py-2.5 w-full min-h-12 z-40 text-gray-800 transition-all duration-150 ease block" +
         appBarClasses
       }
     >

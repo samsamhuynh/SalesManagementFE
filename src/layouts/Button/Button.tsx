@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import "./../../index.css";
+import "./../../index.scss";
 
 const RegularButton = (props: any) => {
   const {
@@ -36,8 +36,8 @@ const RegularButton = (props: any) => {
     "border-0",
     "rounded-sm",
     "relative",
-    "py-3",
-    "px-8",
+    // "py-3",
+    // "px-8",
     "m-1",
     "touch-manipulation",
     "cursor-pointer",
@@ -50,6 +50,12 @@ const RegularButton = (props: any) => {
     // "hover:bg-gray-1200",
     // "hover:shadow-lg",
     {
+      "relative inline-block top-0 w-[18px] h-[18px] mr-2 aligh-middle":
+        children === "svg",
+      "relative inline-block top-0 -my-4 mr-2 aligh-middle text-lg":
+        children === ".fab,& .fas,& .far,& .fal, &.material-icons",
+      "absolute mt-0 w-full h-full left-0 top-0 leading-10 text-xl":
+        children && justIcon === ".fab,& .fas,& .far,& .fal, &.material-icons",
       "bg-gray-100": color === "gray",
       "bg-rose-100": color === "rose",
       "bg-primary-100": color === "primary",
@@ -61,7 +67,7 @@ const RegularButton = (props: any) => {
       "bg-transparent text-inherit": color === "transparent",
       "rounded-full": round,
       "disabled:opacity-65 disabled:pointer-events-none": disabled,
-      "hover:text-gray-100 hover:bg-transparent hover:shadow-none":
+      "hover:text-gray-100 hover:bg-transparent hover:shadow-none hover:text-white":
         simple && color === "transparent",
       "hover:text-rose-100": simple && color === "rose",
       "hover:text-primary-100": simple && color === "primary",
@@ -71,15 +77,20 @@ const RegularButton = (props: any) => {
       "hover:text-danger-100": simple && color === "danger",
       "!w-full": block,
       "hover:bg-transparent hover:text-gray-100 hover:shadow-none": link,
-      "px-3 min-w-10 w-10 h-10 text-xl mr-0": justIcon,
-      "min-w-14 w-14 h-14 text-3xl leading-[56px]": justIcon && size === "lg",
+      "px-3 w-10 h-10 text-xl mr-0": justIcon,
+      "min-w-14 w-14 h-14 text-3xl leading-[56px]": justIcon && size === "md",
       "min-w-7 w-7 h-7 text-lg leading-7": justIcon && size === "sm",
     },
     className
   );
 
   return (
-    <Button classes={muiClasses} {...rest} className={btnClasses}>
+    <Button
+      color="inherit"
+      classes={muiClasses}
+      {...rest}
+      className={btnClasses}
+    >
       {children}
     </Button>
   );
@@ -96,7 +107,7 @@ RegularButton.propTypes = {
     "white",
     "transparent",
   ]),
-  size: PropTypes.oneOf(["sm", "lg"]),
+  size: PropTypes.oneOf(["sm", "md"]),
   simple: PropTypes.bool,
   round: PropTypes.bool,
   disabled: PropTypes.bool,

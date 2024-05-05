@@ -1,4 +1,4 @@
-import { Dashboard, Notifications, Person, Search } from "@mui/icons-material";
+import { Notifications, Person, Search } from "@mui/icons-material";
 import {
   ClickAwayListener,
   Divider,
@@ -9,7 +9,7 @@ import {
   Paper,
   Popper,
 } from "@mui/material";
-import "./../../../index.css";
+import "./../../../index.scss";
 import CustomInput from "../../CustomInput";
 import { useState } from "react";
 import RegularButton from "../../Button";
@@ -51,58 +51,46 @@ const AdminNavbarLinks = () => {
   };
 
   return (
-    <div>
-      <div className="inline-block lg:mt-2.5 lg:mx-3.5 lg:mb-0 lg:fill-available lg:float-right">
-        <div className="lg:m-0 lg:z-40 !my-2.5 !mx-3.5 !float-none py-px !p-0 mt-10 w-3/5 text-white">
-          <CustomInput
-            formControlProps={{}}
-            inputProps={{
-              placeholder: "Search",
-              inputProps: {
-                "aria-label": "Search",
-              },
-            }}
-          />
-        </div>
-        <RegularButton color="white" aria-label="edit" justIcon round>
-          <Search className="text-2xl leading-7 w-6 h-8 mr-3.5 -ml-3.5 lg:mx-0" />
+    <div className="lg:flex lg:flex-row flex flex-col">
+      <div className="flex flex-row w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative bg-transparent fill-available p-0 lg:mx-0">
+        <CustomInput
+          formControlProps={{
+            classNames:
+              "lg:m-0 lg:z-40 !my-2.5 !mx-3.5 !float-none py-px !p-0 mt-10 w-3/5",
+          }}
+          inputProps={{
+            placeholder: "Search",
+            inputProps: {
+              "aria-label": "Search",
+            },
+          }}
+        />
+
+        <RegularButton aria-label="edit" justIcon round>
+          <Search className="text-2xl leading-7 mr-3.5 -ml-3.5 bg-white rounded-full lg:bg-transparent lg:rounded-none" />
         </RegularButton>
       </div>
 
-      <div className="inline-block lg:mt-2.5 lg:mx-3.5 lg:mb-0 lg:fill-available lg:float-right">
+      <div className="inline-block max-w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative bg-transparent fill-available p-0 lg:mx-3">
         <RegularButton
-          color={window.innerWidth > 959 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
-          aria-label="Dashboard"
-          className="sm:flex sm:mt-2.5 sm:mx-3.5 sm:mb-0 sm:fill-available"
-        >
-          <Dashboard className="text-2xl leading-7 w-6 h-8 mr-3.5 -ml-3.5 lg:mx-0" />
-
-          <Hidden mdUp implementation="css">
-            <p className="z-40 m-0 text-sm">Dashboard</p>
-          </Hidden>
-        </RegularButton>
-      </div>
-
-      <div className="inline-block lg:mt-2.5 lg:mx-3.5 lg:mb-0 lg:fill-available lg:float-right">
-        <RegularButton
-          color={window.innerWidth > 959 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
+          color={window.innerWidth > 900 ? "transparent" : "white"}
+          justIcon={window.innerWidth > 900}
+          simple={!(window.innerWidth > 900)}
           aria-owns={openNotification ? "notification-menu-list-grow" : null}
           aria-haspopup="true"
           onClick={handleClickNotification}
-          className="sm:flex sm:mt-2.5 sm:mx-3.5 sm:mb-0 sm:fill-available"
+          sx={{ px: 0 }}
         >
-          <Notifications className="text-2xl leading-7 w-6 h-8 mr-3.5 -ml-3.5 lg:mx-0" />
+          <Notifications className="w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80 lg:text-inherit" />
 
-          <span className="z-40 lg:absolute lg:block lg:w-4 lg:h-4 lg:top-0.5 lg:right-1 lg:rounded-full lg:border-2 lg:border-solid lg:border-white lg:bg-danger-100 lg:text-white lg:text-[9px] lg:text-center lg:align-middle">
+          <span className="z-40 mr-3.5 leading-7 text-sm text-white font-thin lg:absolute lg:block lg:w-4 lg:h-4 lg:top-0.5 lg:right-1 lg:rounded-full lg:border-2 lg:border-solid lg:border-white lg:bg-danger-100 lg:text-white lg:text-[9px] lg:text-center lg:align-middle">
             5
           </span>
 
           <Hidden mdUp implementation="css">
-            <p className="z-40 m-0 text-sm">Notification</p>
+            <p className="m-0 leading-7 text-sm text-white font-thin">
+              Notification
+            </p>
           </Hidden>
         </RegularButton>
 
@@ -167,20 +155,22 @@ const AdminNavbarLinks = () => {
         </Popper>
       </div>
 
-      <div className="inline-block lg:mt-2.5 lg:mx-3.5 lg:mb-0 lg:fill-available lg:float-right">
+      <div className="inline-block max-w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative bg-transparent fill-available p-0 lg:mx-3">
         <RegularButton
-          color={window.innerWidth > 959 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
-          aria-owns={openProfile ? "profile-menu-list-grow" : null}
+          color={window.innerWidth > 900 ? "transparent" : "white"}
+          justIcon={window.innerWidth > 900}
+          simple={!(window.innerWidth > 900)}
+          aria-owns={openNotification ? "notification-menu-list-grow" : null}
           aria-haspopup="true"
-          onClick={handleClickProfile}
-          className="sm:flex sm:mt-2.5 sm:mx-3.5 sm:mb-0 sm:fill-available"
+          onClick={handleClickNotification}
+          sx={{ px: 0 }}
         >
-          <Person className="text-2xl leading-7 w-6 h-8 mr-3.5 -ml-3.5 lg:mx-0" />
+          <Person className="w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80 lg:text-inherit" />
 
           <Hidden mdUp implementation="css">
-            <p className="z-40 m-0 text-sm">Profile</p>
+            <p className="m-0 leading-7 text-sm text-white font-thin">
+              Profile
+            </p>
           </Hidden>
         </RegularButton>
 
