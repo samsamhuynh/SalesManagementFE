@@ -11,17 +11,19 @@ import {
 } from "@mui/material";
 import "./../../../index.scss";
 import CustomInput from "../../CustomInput";
-import { useState } from "react";
+import React, { useState } from "react";
 import RegularButton from "../../Button";
+import classNames from "classnames";
 
 const AdminNavbarLinks = () => {
   const [openNotification, setOpenNotification] = useState<HTMLElement | null>(
     null
   );
+
   const [openProfile, setOpenProfile] = useState<HTMLElement | null>(null);
 
   const handleClickNotification = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+    event: React.MouseEvent<HTMLElement, MouseEvent>
   ) => {
     const target = event.currentTarget;
     if (openNotification && openNotification.contains(target)) {
@@ -36,7 +38,7 @@ const AdminNavbarLinks = () => {
   };
 
   const handleClickProfile = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+    event: React.MouseEvent<HTMLElement, MouseEvent>
   ) => {
     const target = event.currentTarget;
     if (openProfile && openProfile.contains(target)) {
@@ -55,8 +57,9 @@ const AdminNavbarLinks = () => {
       <div className="flex flex-row w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative bg-transparent fill-available p-0 lg:mx-0">
         <CustomInput
           formControlProps={{
-            classNames:
-              "lg:m-0 lg:z-40 !my-2.5 !mx-3.5 !float-none py-px !p-0 mt-10 w-3/5",
+            className: classNames(
+              "lg:m-0 lg:z-40 !my-2.5 !mx-3.5 !float-none py-px !p-0 mt-10 w-3/5"
+            ),
           }}
           inputProps={{
             placeholder: "Search",
@@ -88,7 +91,10 @@ const AdminNavbarLinks = () => {
           </span>
 
           <Hidden mdUp implementation="css">
-            <p className="m-0 leading-7 text-sm text-white font-thin">
+            <p
+              onClick={handleCloseNotification}
+              className="m-0 leading-7 text-sm text-white font-thin"
+            >
               Notification
             </p>
           </Hidden>
@@ -99,7 +105,11 @@ const AdminNavbarLinks = () => {
           anchorEl={openNotification}
           transition
           disablePortal
-          className="pointer-events-none "
+          className={
+            classNames({ "pointer-event-none": !openNotification }) +
+            " " +
+            "sm:!static sm:!left-auto sm:!top-auto sm:!transform-none sm:!will-change-auto"
+          }
         >
           {({ TransitionProps, placement }) => (
             <Grow
@@ -160,9 +170,9 @@ const AdminNavbarLinks = () => {
           color={window.innerWidth > 900 ? "transparent" : "white"}
           justIcon={window.innerWidth > 900}
           simple={!(window.innerWidth > 900)}
-          aria-owns={openNotification ? "notification-menu-list-grow" : null}
+          aria-owns={openProfile ? "profile-menu-list-grow" : null}
           aria-haspopup="true"
-          onClick={handleClickNotification}
+          onClick={handleClickProfile}
           sx={{ px: 0 }}
         >
           <Person className="w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80 lg:text-inherit relative" />
@@ -179,7 +189,11 @@ const AdminNavbarLinks = () => {
           anchorEl={openProfile}
           transition
           disablePortal
-          className="pointer-events-none "
+          className={
+            classNames({ "pointer-event-none": !openProfile }) +
+            " " +
+            "sm:!static sm:!left-auto sm:!top-auto sm:!transform-none sm:!will-change-auto"
+          }
         >
           {({ TransitionProps, placement }) => (
             <Grow

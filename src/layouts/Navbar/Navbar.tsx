@@ -7,7 +7,9 @@ import classNames from "classnames";
 
 const Header = (props: any) => {
   const { color, handleDrawerToggle } = props;
-  const appBarClasses = color ? ` ${color}` : " ";
+  const appBarClasses = classNames({
+    [" " + [color]]: color,
+  });
 
   return (
     <AppBar

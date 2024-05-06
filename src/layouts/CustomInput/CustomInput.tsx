@@ -15,15 +15,20 @@ const CustomInput = (props: any) => {
     success,
   } = props;
 
-  const labelClasses = `${error ? "text-danger-100" : ""} ${
-    success && !error ? "text-success-100" : ""
-  }`;
+  const labelClasses = classNames({
+    "text-danger-100": error,
+    "text-success-100": success && !error,
+  });
 
-  const underlineClasses = `${error ? "after:border-danger-100" : ""} ${
-    success && !error ? "after:border-success-100" : ""
-  }`;
+  const underlineClasses = classNames({
+    "after:border-danger-100": error,
+    "after:border-success-100": success && !error,
+    "before:!border-gray-500 before::!border-2 after:border-primary-100": true,
+  });
 
-  const marginTop = `${labelText === undefined ? "mt-4" : ""}`;
+  const marginTop = classNames({
+    "mt-4": labelText === undefined,
+  });
 
   return (
     <FormControl
@@ -47,13 +52,13 @@ const CustomInput = (props: any) => {
       ) : null}
 
       <Input
+        className={{
+          root: marginTop,
+          disabled: "before:!bg-transparent",
+          // underline: underlineClasses,
+        }}
         id={id}
         {...inputProps}
-        className={classNames({
-          root: marginTop,
-          // underline: underlineClasses,
-          disabled: "before:!bg-transparent",
-        })}
       >
         {error ? (
           <Clear className="absolute block right-0 top-5 z-20 w-6 h-6 text-center pointer-events-none text-danger-100" />

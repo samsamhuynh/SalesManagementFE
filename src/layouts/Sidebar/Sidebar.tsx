@@ -73,14 +73,23 @@ const Sidebar = (props: any) => {
   const links = (
     <List className="mt-5 py-0 pl-0 mb-0 list-none static">
       {menu.map((prop: any, key: any) => {
-        const activePro = prop.path === "/upgrade-to-pro" ? "activePro " : " ";
-        const listItemClasses =
-          prop.path === "/upgrade-to-pro"
-            ? color
-            : activeRoute(prop.path)
-            ? color
-            : " ";
-        const whiteFontClasses = activeRoute(prop.path) ? "whiteFont" : " ";
+        let activePro = " ";
+        let listItemClasses;
+        if (prop.path === "/upgrade-to-pro") {
+          activePro = "md:absolute md:w-full md:bottom-3" + " ";
+          listItemClasses = classNames({
+            [" " + [color]]: true,
+          });
+        } else {
+          listItemClasses = classNames({
+            [" " + [color]]: activeRoute(prop.path),
+          });
+        }
+
+        const whiteFontClasses = classNames({
+          "text-white": activeRoute(prop.path),
+        });
+
         return (
           <NavLink
             style={({ isActive }) => {
