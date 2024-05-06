@@ -81,9 +81,9 @@ const AdminNavbarLinks = () => {
           onClick={handleClickNotification}
           sx={{ px: 0 }}
         >
-          <Notifications className="w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80 lg:text-inherit" />
+          <Notifications className="w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80 lg:text-inherit relative" />
 
-          <span className="z-40 mr-3.5 leading-7 text-sm text-white font-thin lg:absolute lg:block lg:w-4 lg:h-4 lg:top-0.5 lg:right-1 lg:rounded-full lg:border-2 lg:border-solid lg:border-white lg:bg-danger-100 lg:text-white lg:text-[9px] lg:text-center lg:align-middle">
+          <span className="z-40 mr-3.5 leading-7 text-sm text-white font-thin lg:absolute lg:block lg:bg-danger-100 lg:top-0 lg:right-3 lg:w-4 lg:h-4 lg:rounded-full lg:text-[9px] lg:font-thin lg:leading-4 lg:text-center lg:align-middle">
             5
           </span>
 
