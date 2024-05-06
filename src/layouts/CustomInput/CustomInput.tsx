@@ -2,6 +2,7 @@ import { Check, Clear } from "@mui/icons-material";
 import { FormControl, Input, InputLabel } from "@mui/material";
 import PropTypes from "prop-types";
 import "./../../index.scss";
+import classNames from "classnames";
 
 const CustomInput = (props: any) => {
   const {
@@ -27,17 +28,19 @@ const CustomInput = (props: any) => {
   return (
     <FormControl
       {...formControlProps}
-      className={"pb-2.5 mt-[27px] relative align-middle" + formControlProps}
+      className={classNames(
+        "pb-2.5 mt-[27px] relative align-middle" + formControlProps
+      )}
     >
       {labelText !== undefined ? (
         <InputLabel
           // color="primary"
           htmlFor={id}
           {...labelProps}
-          classes={
+          classes={classNames(
             "!text-gray-400 font-normal text-sm leading-7 no-underline" +
-            labelClasses
-          }
+              labelClasses
+          )}
         >
           {labelText}
         </InputLabel>
@@ -46,11 +49,11 @@ const CustomInput = (props: any) => {
       <Input
         id={id}
         {...inputProps}
-        className={{
+        className={classNames({
           root: marginTop,
           // underline: underlineClasses,
           disabled: "before:!bg-transparent",
-        }}
+        })}
       >
         {error ? (
           <Clear className="absolute block right-0 top-5 z-20 w-6 h-6 text-center pointer-events-none text-danger-100" />

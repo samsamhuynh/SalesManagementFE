@@ -18,12 +18,13 @@ import {
   Person,
 } from "@mui/icons-material";
 import AdminNavbarLinks from "../Navbar/AdminNavbarLink";
+import classNames from "classnames";
 
 const Sidebar = (props: any) => {
   const { color, logo, image, logoText, open, handleDrawerToggle } = props;
 
   function activeRoute(routeName: string): boolean {
-    return window.location.href.indexOf(routeName) > -1 ? false : true;
+    return window.location.href.indexOf(routeName) > -1 ? true : false;
   }
 
   const menu = [
@@ -88,39 +89,39 @@ const Sidebar = (props: any) => {
               };
             }}
             to={prop.path}
-            className={activePro + "relative block no-underline"}
+            className={classNames(activePro + "relative block no-underline")}
             key={key}
           >
             <ListItem
               button
-              className={
+              className={classNames(
                 "w-auto transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative block py-2.5 px-3.5 bg-transparent" +
-                listItemClasses
-              }
+                  listItemClasses
+              )}
             >
               {typeof prop.icon === "string" ? (
                 <Icon
-                  className={
-                    "w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80" +
+                  className={classNames(
+                    "w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80",
                     whiteFontClasses
-                  }
+                  )}
                 >
                   {prop.icon}
                 </Icon>
               ) : (
                 <prop.icon
-                  className={
-                    "w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80" +
+                  className={classNames(
+                    "w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80",
                     whiteFontClasses
-                  }
+                  )}
                 />
               )}
               <ListItemText
                 primary={prop.name}
-                className={
-                  "m-0 leading-7 text-sm text-white font-thin" +
+                className={classNames(
+                  "m-0 leading-7 text-sm text-white font-thin",
                   whiteFontClasses
-                }
+                )}
                 disableTypography={true}
               />
             </ListItem>

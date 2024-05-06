@@ -23,6 +23,7 @@ const Layout = ({ ...rest }) => {
       setMobileOpen(false);
     }
   };
+
   useEffect(() => {
     let ps: PerfectScrollbar | null = null;
     if (navigator.platform.indexOf("Win") > -1) {

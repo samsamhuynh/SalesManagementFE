@@ -67,7 +67,7 @@ const AdminNavbarLinks = () => {
         />
 
         <RegularButton aria-label="edit" justIcon round>
-          <Search className="text-2xl leading-7 mr-3.5 -ml-3.5 bg-white rounded-full lg:bg-transparent lg:rounded-none" />
+          <Search className="w-8 h-8 text-2xl leading-7 text-center align-middle text-inherit bg-white rounded-full" />
         </RegularButton>
       </div>
 
@@ -165,7 +165,7 @@ const AdminNavbarLinks = () => {
           onClick={handleClickNotification}
           sx={{ px: 0 }}
         >
-          <Person className="w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80 lg:text-inherit" />
+          <Person className="w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80 lg:text-inherit relative" />
 
           <Hidden mdUp implementation="css">
             <p className="m-0 leading-7 text-sm text-white font-thin">
