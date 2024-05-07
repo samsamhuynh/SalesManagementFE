@@ -33,19 +33,26 @@ const CustomInput = (props: any) => {
   return (
     <FormControl
       {...formControlProps}
-      className={classNames(
-        "pb-2.5 mt-[27px] relative align-middle" + formControlProps
-      )}
+      className={classNames(formControlProps)}
+      style={{
+        paddingBottom: "10px",
+        position: "relative",
+        verticalAlign: "unset",
+      }}
     >
       {labelText !== undefined ? (
         <InputLabel
           // color="primary"
           htmlFor={id}
           {...labelProps}
-          classes={classNames(
-            "!text-gray-400 font-normal text-sm leading-7 no-underline" +
-              labelClasses
-          )}
+          className={classNames(labelClasses)}
+          style={{
+            color: "#D2D2D2" + " !important",
+            fontWeight: "400",
+            fontSize: "14px",
+            lineHeight: "1.42857",
+            letterSpacing: "unset",
+          }}
         >
           {labelText}
         </InputLabel>
@@ -62,9 +69,37 @@ const CustomInput = (props: any) => {
         {...inputProps}
       >
         {error ? (
-          <Clear className="absolute block right-0 top-5 z-20 w-6 h-6 text-center pointer-events-none text-danger-100" />
+          <Clear
+            // className="absolute block right-0 top-5 z-20 w-6 h-6 text-center pointer-events-none text-danger-100"
+
+            style={{
+              position: "absolute",
+              display: "block",
+              zIndex: "2",
+              top: "18px",
+              right: "0",
+              width: "24px",
+              height: "24px",
+              textAlign: "center",
+              pointerEvents: "none",
+              color: "#f44336",
+            }}
+          />
         ) : success ? (
-          <Check className="absolute block right-0 top-5 z-20 w-6 h-6 text-center pointer-events-none text-success-100" />
+          <Check
+            style={{
+              position: "absolute",
+              display: "block",
+              zIndex: "2",
+              top: "18px",
+              right: "0",
+              width: "24px",
+              height: "24px",
+              textAlign: "center",
+              pointerEvents: "none",
+              color: "#4caf50",
+            }}
+          />
         ) : null}
       </Input>
     </FormControl>
