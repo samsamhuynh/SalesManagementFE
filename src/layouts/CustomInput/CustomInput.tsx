@@ -56,6 +56,7 @@ const CustomInput = (props: any) => {
           root: marginTop,
           disabled: "before:!bg-transparent",
           // underline: underlineClasses,
+          color: "primary",
         }}
         id={id}
         {...inputProps}

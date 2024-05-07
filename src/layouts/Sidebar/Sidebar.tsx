@@ -208,13 +208,12 @@ const Sidebar = (props: any) => {
 };
 
 Sidebar.propTypes = {
-  rtlActive: PropTypes.bool,
   handleDrawerToggle: PropTypes.func,
+  bgColor: PropTypes.oneOf(["purple", "blue", "green", "orange", "red"]),
   logo: PropTypes.string,
   image: PropTypes.string,
   logoText: PropTypes.string,
   open: PropTypes.bool,
-  bgColor: PropTypes.oneOf(["purple", "blue", "green", "orange", "red"]),
 };
 
 export default Sidebar;

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import classNames from "classnames";
 import { Notifications, Person, Search } from "@mui/icons-material";
 import {
   ClickAwayListener,
@@ -11,25 +13,18 @@ import {
 } from "@mui/material";
 import "./../../../index.scss";
 import CustomInput from "../../CustomInput";
-import React, { useState } from "react";
-import RegularButton from "../../Button";
-import classNames from "classnames";
+import Button from "../../Button";
 
 const AdminNavbarLinks = () => {
-  const [openNotification, setOpenNotification] = useState<HTMLElement | null>(
-    null
-  );
+  const [openNotification, setOpenNotification] = useState<any>(null);
 
-  const [openProfile, setOpenProfile] = useState<HTMLElement | null>(null);
+  const [openProfile, setOpenProfile] = useState<any>(null);
 
-  const handleClickNotification = (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
-  ) => {
-    const target = event.currentTarget;
-    if (openNotification && openNotification.contains(target)) {
+  const handleClickNotification = (event: any) => {
+    if (openNotification && openNotification.contains(event.target)) {
       setOpenNotification(null);
     } else {
-      setOpenNotification(target);
+      setOpenNotification(event.currentTarget);
     }
   };
 
@@ -37,14 +32,11 @@ const AdminNavbarLinks = () => {
     setOpenNotification(null);
   };
 
-  const handleClickProfile = (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
-  ) => {
-    const target = event.currentTarget;
-    if (openProfile && openProfile.contains(target)) {
+  const handleClickProfile = (event: any) => {
+    if (openProfile && openProfile.contains(event.target)) {
       setOpenProfile(null);
     } else {
-      setOpenProfile(target);
+      setOpenProfile(event.currentTarget);
     }
   };
 
@@ -69,13 +61,13 @@ const AdminNavbarLinks = () => {
           }}
         />
 
-        <RegularButton aria-label="edit" justIcon round>
+        <Button aria-label="edit">
           <Search className="w-8 h-8 text-2xl leading-7 text-center align-middle text-inherit bg-white rounded-full" />
-        </RegularButton>
+        </Button>
       </div>
 
       <div className="inline-block max-w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative bg-transparent fill-available p-0 lg:mx-3">
-        <RegularButton
+        <Button
           color={window.innerWidth > 900 ? "transparent" : "white"}
           justIcon={window.innerWidth > 900}
           simple={!(window.innerWidth > 900)}
@@ -98,7 +90,7 @@ const AdminNavbarLinks = () => {
               Notification
             </p>
           </Hidden>
-        </RegularButton>
+        </Button>
 
         <Popper
           open={Boolean(openNotification)}
@@ -166,14 +158,15 @@ const AdminNavbarLinks = () => {
       </div>
 
       <div className="inline-block max-w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative bg-transparent fill-available p-0 lg:mx-3">
-        <RegularButton
-          color={window.innerWidth > 900 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 900}
-          simple={!(window.innerWidth > 900)}
+        <Button
+          // color={window.innerWidth > 900 ? "transparent" : "white"}
+          // justIcon={window.innerWidth > 900}
+          // simple={!(window.innerWidth > 900)}
           aria-owns={openProfile ? "profile-menu-list-grow" : null}
           aria-haspopup="true"
           onClick={handleClickProfile}
           sx={{ px: 0 }}
+          className={""}
         >
           <Person className="w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80 lg:text-inherit relative" />
 
@@ -182,11 +175,12 @@ const AdminNavbarLinks = () => {
               Profile
             </p>
           </Hidden>
-        </RegularButton>
+        </Button>
 
         <Popper
           open={Boolean(openProfile)}
           anchorEl={openProfile}
+          role={undefined}
           transition
           disablePortal
           className={
@@ -206,7 +200,7 @@ const AdminNavbarLinks = () => {
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleCloseProfile}>
-                  <MenuList role="menu">
+                  <MenuList role="menu" autoFocusItem>
                     <MenuItem
                       onClick={handleCloseProfile}
                       className="text-[13px] font-normal leading-7 text-gray-900 whitespace-nowrap py-2.5 px-5 my-0 mx-[5px] h-auto min-w-auto rounded-sm block clear-both hover:bg-primary-100 hover:text-white hover:primaryBoxShadow"

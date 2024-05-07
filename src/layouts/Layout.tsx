@@ -16,7 +16,7 @@ const Layout = ({ ...rest }) => {
     setMobileOpen(!mobileOpen);
   };
 
-  const mainPanel = useRef<HTMLDivElement | null>(null);
+  const mainPanel = useRef<any>(null);
 
   const resizeFunction = () => {
     if (window.innerWidth >= 900) {
@@ -25,27 +25,46 @@ const Layout = ({ ...rest }) => {
   };
 
   useEffect(() => {
-    let ps: PerfectScrollbar | null = null;
+    let ps: any;
     if (navigator.platform.indexOf("Win") > -1) {
-      if (mainPanel.current) {
-        ps = new PerfectScrollbar(mainPanel.current, {
-          suppressScrollX: true,
-          suppressScrollY: false,
-        });
-        document.body.style.overflow = "hidden";
-      }
+      ps = new PerfectScrollbar(mainPanel.current, {
+        suppressScrollX: true,
+        suppressScrollY: false,
+      });
+      document.body.style.overflow = "hidden";
     }
-
     window.addEventListener("resize", resizeFunction);
-
     // Specify how to clean up after this effect:
-    return () => {
-      if (navigator.platform.indexOf("Win") > -1 && ps) {
+    return function cleanup() {
+      if (navigator.platform.indexOf("Win") > -1) {
         ps.destroy();
       }
       window.removeEventListener("resize", resizeFunction);
     };
   }, [mainPanel]);
+
+  // useEffect(() => {
+  //   let ps: PerfectScrollbar | null = null;
+  //   if (navigator.platform.indexOf("Win") > -1) {
+  //     if (mainPanel.current) {
+  //       ps = new PerfectScrollbar(mainPanel.current, {
+  //         suppressScrollX: true,
+  //         suppressScrollY: false,
+  //       });
+  //       document.body.style.overflow = "hidden";
+  //     }
+  //   }
+
+  //   window.addEventListener("resize", resizeFunction);
+
+  //   // Specify how to clean up after this effect:
+  //   return () => {
+  //     if (navigator.platform.indexOf("Win") > -1 && ps) {
+  //       ps.destroy();
+  //     }
+  //     window.removeEventListener("resize", resizeFunction);
+  //   };
+  // }, [mainPanel]);
 
   return (
     <div className="relative top-0 h-screen">
@@ -55,7 +74,7 @@ const Layout = ({ ...rest }) => {
         image={image}
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
-        color={color}
+        bgColor={color}
         {...rest}
       />
       <div
