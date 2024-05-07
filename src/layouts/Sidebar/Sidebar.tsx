@@ -21,12 +21,6 @@ import AdminNavbarLinks from "../Navbar/AdminNavbarLink";
 import classNames from "classnames";
 
 const Sidebar = (props: any) => {
-  const { color, logo, image, logoText, open, handleDrawerToggle } = props;
-
-  function activeRoute(routeName: string): boolean {
-    return window.location.href.indexOf(routeName) > -1 ? true : false;
-  }
-
   const menu = [
     {
       path: "/dashboard",
@@ -70,13 +64,19 @@ const Sidebar = (props: any) => {
     },
   ];
 
+  const { color, logo, image, logoText, open, handleDrawerToggle } = props;
+
+  function activeRoute(routeName: string): boolean {
+    return window.location.href.indexOf(routeName) > -1 ? true : false;
+  }
+
   const links = (
     <List className="mt-5 py-0 pl-0 mb-0 list-none static">
       {menu.map((prop: any, key: any) => {
         let activePro = " ";
         let listItemClasses;
         if (prop.path === "/upgrade-to-pro") {
-          activePro = "md:absolute md:w-full md:bottom-3" + " ";
+          activePro = "absolute w-full bottom-3" + " ";
           listItemClasses = classNames({
             [" " + [color]]: true,
           });
@@ -94,7 +94,7 @@ const Sidebar = (props: any) => {
           <NavLink
             style={({ isActive }) => {
               return {
-                color: isActive ? "white" : "white",
+                background: isActive ? "blue" : "transparent",
               };
             }}
             to={prop.path}
@@ -215,7 +215,6 @@ Sidebar.propTypes = {
   logoText: PropTypes.string,
   open: PropTypes.bool,
   bgColor: PropTypes.oneOf(["purple", "blue", "green", "orange", "red"]),
-  color: PropTypes.oneOf(["purple", "blue", "green", "orange", "red"]),
 };
 
 export default Sidebar;
