@@ -16,12 +16,28 @@ const Header = (props: any) => {
       color="transparent"
       elevation={0}
       position="absolute"
-      className={classNames(
-        "mb-0 py-2.5 w-full min-h-12 z-40 text-gray-800 transition-all duration-150 ease block" +
-          appBarClasses
-      )}
+      className={classNames(appBarClasses)}
+      style={{
+        // display: "block",
+        position: "absolute",
+        zIndex: "1029",
+        backgroundColor: "transparent",
+        marginBottom: "0",
+        paddingTop: "10px",
+        padding: "10px 0",
+        width: "100%",
+        minHeight: "50px",
+        color: "#555555",
+        borderBottom: "0",
+        border: "0",
+        borderRadius: "3px",
+        transition: "all 150ms ease 0s",
+        boxShadow: "none",
+      }}
     >
-      <Toolbar className="min-h-12 px-2.5 ml-auto">
+      <Toolbar
+        style={{ minHeight: "50px", padding: "0 10px", marginLeft: "auto" }}
+      >
         <Hidden mdDown implementation="css">
           <AdminNavbarLinks />
         </Hidden>
