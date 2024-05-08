@@ -48,12 +48,17 @@ const AdminNavbarLinks = () => {
   };
 
   return (
-    <div className="lg:flex lg:flex-row flex flex-col">
-      <div className="flex flex-row w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative bg-transparent fill-available p-0 lg:mx-0">
+    <div>
+      <div
+        className={
+          "lg:inline-block flex flex-row mt-2.5 mx-5 w-[-webkit-stretch]"
+        }
+        // className="w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative bg-transparent fill-available p-0 lg:mx-0"
+      >
         <CustomInput
           formControlProps={{
             className: classNames(
-              "lg:m-0 lg:z-40 !my-2.5 !mx-3.5 !float-none py-px !p-0 mt-10 w-3/5"
+              "lg:m-0 lg:z-40 !my-2.5 !mx-3.5 !float-none py-px !p-px mt-10 w-3/5"
             ),
           }}
           inputProps={{
@@ -64,9 +69,12 @@ const AdminNavbarLinks = () => {
           }}
         />
 
-        <Button aria-label="edit" justIcon round>
+        <Button color="white" aria-label="edit" justIcon round>
           <Search
             style={{
+              top: "-50px !important",
+              // marginRight: "22px",
+              float: "right",
               color: "gray",
               fontSize: "24px",
               lineHeight: "30px",
@@ -82,7 +90,7 @@ const AdminNavbarLinks = () => {
         </Button>
       </div>
 
-      <div className="inline-block max-w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative bg-transparent fill-available p-0 lg:mx-3">
+      <div className={"inline-block"}>
         <Button
           color={window.innerWidth > 900 ? "transparent" : "white"}
           justIcon={window.innerWidth > 900}
@@ -90,33 +98,37 @@ const AdminNavbarLinks = () => {
           aria-owns={openNotification ? "notification-menu-list-grow" : null}
           aria-haspopup="true"
           onClick={handleClickNotification}
-          sx={{ px: 0 }}
-          className={classNames("sm:flex sm:mt-2.5 sm:mx-3.5 sm:mb-0")}
+          className={classNames(
+            "flex ml-8 w-auto sm:flex sm:mt-2.5 sm:mx-3.5 sm:mb-0 sm:w-[-webkit-fill-available]"
+          )}
         >
           <Notifications
-            // className="w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80 lg:text-inherit relative"
             style={{
               color: "gray",
               fontSize: "24px",
               lineHeight: "30px",
               width: "24px",
               height: "30px",
-              marginRight: "5px",
-              marginLeft: "5px",
+              marginRight: "15px",
+              marginLeft: "8px",
               textAlign: "center",
               verticalAlign: "middle",
               position: "relative",
             }}
           />
 
-          <span className="z-40 mr-3.5 leading-7 text-sm text-white font-thin lg:absolute lg:block lg:bg-danger-100 lg:top-0 lg:right-3 lg:w-4 lg:h-4 lg:rounded-full lg:text-[9px] lg:font-thin lg:leading-4 lg:text-center lg:align-middle">
+          <span
+            className={
+              "z-40 mr-3.5 leading-7 text-sm text-white font-thin lg:absolute lg:block lg:bg-danger-100 lg:top-0 lg:right-1 lg:w-4 lg:h-4 lg:rounded-full lg:text-[9px] lg:font-thin lg:leading-4 lg:text-center lg:align-middle"
+            }
+          >
             5
           </span>
 
           <Hidden mdUp implementation="css">
             <p
               onClick={handleCloseNotification}
-              className="m-0 leading-7 text-sm text-white font-thin"
+              className={"m-0 leading-7 text-sm text-white font-thin"}
             >
               Notification
             </p>
@@ -142,7 +154,7 @@ const AdminNavbarLinks = () => {
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleCloseNotification}>
-                  <MenuList role="menu" autoFocusItem>
+                  <MenuList role="menu">
                     <MenuItem
                       onClick={handleCloseNotification}
                       style={{
@@ -255,7 +267,7 @@ const AdminNavbarLinks = () => {
         </Popper>
       </div>
 
-      <div className="inline-block max-w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative bg-transparent fill-available p-0 lg:mx-3">
+      <div className={"inline-block"}>
         <Button
           color={window.innerWidth > 900 ? "transparent" : "white"}
           justIcon={window.innerWidth > 900}
@@ -263,8 +275,9 @@ const AdminNavbarLinks = () => {
           aria-owns={openProfile ? "profile-menu-list-grow" : null}
           aria-haspopup="true"
           onClick={handleClickProfile}
-          sx={{ px: 0 }}
-          className={classNames("sm:flex sm:mt-2.5 sm:mx-3.5 sm:mb-0")}
+          className={classNames(
+            "flex ml-8 w-auto sm:flex sm:mt-2.5 sm:mx-3.5 sm:mb-0 sm:w-[-webkit-fill-available]"
+          )}
         >
           <Person
             style={{
@@ -273,8 +286,8 @@ const AdminNavbarLinks = () => {
               lineHeight: "30px",
               width: "24px",
               height: "30px",
-              marginRight: "5px",
-              marginLeft: "5px",
+              marginRight: "15px",
+              marginLeft: "8px",
               textAlign: "center",
               verticalAlign: "middle",
               position: "relative",
@@ -282,7 +295,7 @@ const AdminNavbarLinks = () => {
           />
 
           <Hidden mdUp implementation="css">
-            <p className="m-0 leading-7 text-sm text-white font-thin">
+            <p className={"m-0 leading-7 text-sm text-white font-thin"}>
               Profile
             </p>
           </Hidden>
@@ -293,7 +306,7 @@ const AdminNavbarLinks = () => {
           anchorEl={openProfile}
           transition
           disablePortal
-          className={classNames({ "pointer-event-none": !openNotification })}
+          className={classNames({ "pointer-event-none": !openProfile })}
           style={{ zIndex: "4", fontSize: "14px", margin: "0px" }}
         >
           {({ TransitionProps, placement }) => (
@@ -307,7 +320,7 @@ const AdminNavbarLinks = () => {
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleCloseProfile}>
-                  <MenuList role="menu" autoFocusItem>
+                  <MenuList role="menu">
                     <MenuItem
                       onClick={handleCloseProfile}
                       style={{

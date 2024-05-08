@@ -71,7 +71,7 @@ const Sidebar = (props: any) => {
   }
 
   const links = (
-    <List className="mt-5 py-0 pl-0 mb-0 list-none static">
+    <List className="mt-5 py-0 pl-0 mb-0 list-none static" style={{}}>
       {menu.map((prop: any, key: any) => {
         let activePro = " ";
         let listItemClasses;
@@ -141,16 +141,22 @@ const Sidebar = (props: any) => {
   );
 
   const brand = (
-    <div className="relative px-3.5 py-3.5 z-50 after:absolute after:bottom-0 after:right-3.5 after:h-px after:w-[calc(100% - 30px)] after:bg-gray-700">
+    <div
+      className={
+        "relative px-3.5 py-3.5 z-50 after:absolute after:bottom-0 after:right-3.5 after:h-px after:w-[calc(100% - 30px)] after:bg-gray-700"
+      }
+    >
       <a
         target="_blank"
-        className="uppercase py-1 block text-white text-left text-lg font-bold leading-7 no-underline bg-transparent border-b-2 border-solid border-gray-800"
+        className={
+          "uppercase py-1 block text-white text-left text-lg font-bold leading-7 no-underline bg-transparent border-b-2 border-solid border-gray-800"
+        }
       >
-        <div className="w-7 inline-block max-h-7 ml-2.5 mr-3.5">
+        <div className={"w-7 inline-block max-h-7 ml-2.5 mr-3.5"}>
           <img
             src={logo}
             alt="logo"
-            className="w-9 top-5 absolute align-middle border-0"
+            className={"w-9 top-5 absolute align-middle border-0"}
           />
         </div>
         {logoText}
@@ -169,16 +175,22 @@ const Sidebar = (props: any) => {
           ModalProps={{
             keepMounted: true,
           }}
-          className="z-50 boxShadow block fixed top-0 left-auto right-0 w-64 h-full text-left px-0"
+          classes={{
+            paper: classNames(
+              "z-50 boxShadow block fixed top-0 left-auto right-0 w-64 h-full text-left px-0"
+            ),
+          }}
         >
           {brand}
-          <div className="relative h-[calc(100vh - 75px)] w-64 z-50">
+          <div className={"relative h-[calc(100vh - 75px)] w-64 z-50"}>
             <AdminNavbarLinks />
             {links}
           </div>
           {image !== undefined ? (
             <div
-              className="absolute z-10 h-full w-full block top-0 left-0 bg-cover bg-center after:absolute after:z-30 after:w-full after:h-full after:block after:bg-black after:opacity-80"
+              className={
+                "absolute z-10 h-full w-full block top-0 left-0 bg-cover bg-center after:absolute after:z-30 after:w-full after:h-full after:block after:bg-black after:opacity-80"
+              }
               style={{ backgroundImage: "url(" + image + ")" }}
             />
           ) : null}
@@ -189,15 +201,21 @@ const Sidebar = (props: any) => {
         <Drawer
           variant="permanent"
           open
-          className="border-0 boxShadow fixed top-0 bottom-0 left-0 z-50 w-64 h-full block text-left"
+          classes={{
+            paper: classNames(
+              "border-0 boxShadow fixed top-0 bottom-0 left-0 z-50 w-64 h-full block text-left"
+            ),
+          }}
         >
           {brand}
-          <div className="relative h-[calc(100vh - 75px)] w-64 z-50">
+          <div className={"relative h-[calc(100vh - 75px)] w-64 z-50"}>
             {links}
           </div>
           {image !== undefined ? (
             <div
-              className="absolute z-10 h-full w-full block top-0 left-0 bg-cover bg-center after:absolute after:z-30 after:w-full after:h-full after:block after:bg-black after:opacity-80"
+              className={
+                "absolute z-10 h-full w-full block top-0 left-0 bg-cover bg-center after:absolute after:z-30 after:w-full after:h-full after:block after:bg-black after:opacity-80"
+              }
               style={{ backgroundImage: "url(" + image + ")" }}
             />
           ) : null}
