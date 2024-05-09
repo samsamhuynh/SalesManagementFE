@@ -2,11 +2,9 @@ import {
   Avatar,
   Box,
   Button,
-  Checkbox,
   Container,
   CssBaseline,
   FormControl,
-  FormControlLabel,
   Grid,
   IconButton,
   InputAdornment,
@@ -23,12 +21,6 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -58,40 +50,117 @@ const SignUp = () => {
         <Typography variant="h5">Sign Up</Typography>
 
         <Box onSubmit={handleSubmit} component="form" noValidate sx={{ mt: 3 }}>
-          <TextField
-            id="email"
-            name="email"
-            label="Email Address"
-            autoComplete="email"
-            required
-            autoFocus
-            fullWidth
-            margin="normal"
-          ></TextField>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                id="userName"
+                name="userName"
+                label="User Name"
+                autoComplete="user-name"
+                required
+                autoFocus
+                fullWidth
+              />
+            </Grid>
 
-          <FormControl fullWidth margin="normal" required>
-            <InputLabel htmlFor="outlined-adornment-password">
-              Password
-            </InputLabel>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                id="firstName"
+                name="firstName"
+                label="First Name"
+                autoComplete="-name"
+                required
+                autoFocus
+                fullWidth
+              />
+            </Grid>
 
-            <OutlinedInput
-              id="outlined-adornment-password"
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Password"
-            />
-          </FormControl>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                id="lastName"
+                name="lastName"
+                label="Last Name"
+                autoComplete="given-name"
+                required
+                autoFocus
+                fullWidth
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                id="email"
+                name="email"
+                label="Email Address"
+                autoComplete="email"
+                required
+                autoFocus
+                fullWidth
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                id="phoneNumber"
+                name="phoneNumber"
+                label="Phone Number"
+                autoComplete="phoneNumber"
+                required
+                autoFocus
+                fullWidth
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth required>
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth required>
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Confirm Your Password
+                </InputLabel>
+
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Confirm Password"
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
 
           <Button
             type="submit"
@@ -104,8 +173,8 @@ const SignUp = () => {
 
           <Grid container>
             <Grid item>
-              <Link href="/Login" variant="body2">
-                {"Already have an account? Sign in? Sign Up"}
+              <Link href="#" variant="body2">
+                {"Already have an account? Sign in?"}
               </Link>
             </Grid>
           </Grid>

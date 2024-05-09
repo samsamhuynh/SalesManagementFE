@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { BASE_API_URL, LOGIN_API, SIGNUP_API } from "../constants";
+import { BASE_API_URL, LOGIN_API } from "../constants";
 
 interface User {
   id: string;
@@ -18,7 +18,6 @@ interface AuthContextType {
   currentUser: User | null;
   login: (inputs: any) => Promise<void>;
   logout: () => Promise<void>;
-  signup: (inputs: any) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -40,11 +39,6 @@ export const AuthContextProvider: React.FC<any> = ({ children }) => {
     setCurrentUser(null);
   }, []);
 
-  const signup = useCallback(async (inputs: any) => {
-    const res = await axios.post(BASE_API_URL + SIGNUP_API, inputs);
-    setCurrentUser(res.data);
-  }, []);
-
   useEffect(() => {
     if (currentUser) {
       localStorage.setItem("user", JSON.stringify(currentUser));
@@ -54,8 +48,8 @@ export const AuthContextProvider: React.FC<any> = ({ children }) => {
   }, [currentUser]);
 
   const authContextValue = useMemo(
-    () => ({ currentUser, signup, login, logout }),
-    [currentUser, signup, login, logout]
+    () => ({ currentUser, login, logout }),
+    [currentUser, login, logout]
   );
 
   return (
