@@ -1,6 +1,6 @@
 import React, { ReactNode, useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { LOGIN_PAGE } from "../constants";
+import { LOGIN_PAGE, SIGNUP_PAGE } from "../constants";
 import { AuthContext } from "../services";
 
 interface ProtectedRouteProps {
