@@ -12,8 +12,8 @@ import {
   Popper,
 } from "@mui/material";
 import "./../../../index.scss";
-import CustomInput from "../../CustomInput";
-import Button from "../../Button";
+import CustomInput from "../../../components/CustomInput";
+import Button from "../../../components/Button";
 
 const AdminNavbarLinks = () => {
   const [openNotification, setOpenNotification] = useState<any>(null);
