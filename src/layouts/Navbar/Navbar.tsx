@@ -36,7 +36,11 @@ const Header = (props: any) => {
       }}
     >
       <Toolbar
-        style={{ minHeight: "50px", padding: "0 10px", marginLeft: "auto" }}
+        style={{
+          minHeight: "50px",
+          padding: "0 35px",
+          marginLeft: "auto",
+        }}
       >
         <Hidden mdDown implementation="css">
           <AdminNavbarLinks />
