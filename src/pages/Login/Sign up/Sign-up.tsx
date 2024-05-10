@@ -2,9 +2,11 @@ import {
   Avatar,
   Box,
   Button,
+  Checkbox,
   Container,
   CssBaseline,
   FormControl,
+  FormControlLabel,
   Grid,
   IconButton,
   InputAdornment,
@@ -16,6 +18,7 @@ import {
 } from "@mui/material";
 import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import { FormEvent, useState } from "react";
+import { LOGIN_PAGE } from "../../../constants";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,8 +29,10 @@ const SignUp = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      userName: data.get("userName"),
       email: data.get("email"),
       password: data.get("password"),
+      phoneNumber: data.get("phoneNumber"),
     });
   };
 
@@ -71,7 +76,6 @@ const SignUp = () => {
                 autoComplete="-name"
                 required
                 autoFocus
-                fullWidth
               />
             </Grid>
 
@@ -83,11 +87,10 @@ const SignUp = () => {
                 autoComplete="given-name"
                 required
                 autoFocus
-                fullWidth
               />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 id="email"
                 name="email"
@@ -99,7 +102,7 @@ const SignUp = () => {
               />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 id="phoneNumber"
                 name="phoneNumber"
@@ -111,7 +114,7 @@ const SignUp = () => {
               />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <FormControl fullWidth required>
                 <InputLabel htmlFor="outlined-adornment-password">
                   Password
@@ -136,10 +139,10 @@ const SignUp = () => {
               </FormControl>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <FormControl fullWidth required>
                 <InputLabel htmlFor="outlined-adornment-password">
-                  Confirm Your Password
+                  Confirm Password
                 </InputLabel>
 
                 <OutlinedInput
@@ -162,6 +165,11 @@ const SignUp = () => {
             </Grid>
           </Grid>
 
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="I agree to privacy policy & terms"
+          ></FormControlLabel>
+
           <Button
             type="submit"
             variant="contained"
@@ -173,7 +181,7 @@ const SignUp = () => {
 
           <Grid container>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href={LOGIN_PAGE} variant="body2">
                 {"Already have an account? Sign in?"}
               </Link>
             </Grid>

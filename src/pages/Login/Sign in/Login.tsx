@@ -18,8 +18,7 @@ import {
 } from "@mui/material";
 import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import { FormEvent, useState } from "react";
-import { Navigate } from "react-router-dom";
-import { SIGNUP_PAGE } from "../../../constants";
+import { FORGOTPASSWORD_PAGE, SIGNUP_PAGE } from "../../../constants";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,6 +33,14 @@ const Login = () => {
       password: data.get("password"),
     });
   };
+
+  // const [createAccount, setCreateAccount] = useState<null | HTMLElement>(null);
+
+  // const handleClickSignup = (event: React.MouseEvent<HTMLElement>) => {
+  //   setCreateAccount(createAccount ? null : event.currentTarget);
+
+  //   return <Navigate to={SIGNUP_PAGE} />;
+  // };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -104,13 +111,13 @@ const Login = () => {
 
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
+              <Link href={FORGOTPASSWORD_PAGE} variant="body2">
+                {"Forgot Password"}
               </Link>
             </Grid>
 
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href={SIGNUP_PAGE} variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
