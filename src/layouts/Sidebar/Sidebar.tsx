@@ -104,14 +104,14 @@ const Sidebar = (props: any) => {
             <ListItem
               button
               className={classNames(
-                "w-auto transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative block py-2.5 px-3.5 bg-transparent" +
+                "w-auto transition-all duration-300 ease-linear mt-2.5 mx-[15px] rounded relative block py-2.5 px-[15px] bg-transparent" +
                   listItemClasses
               )}
             >
               {typeof prop.icon === "string" ? (
                 <Icon
                   className={classNames(
-                    "w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80",
+                    "w-6 h-8 text-2xl leading-7 float-left mr-[15px] text-center align-middle text-white bg-opacity-80",
                     whiteFontClasses
                   )}
                 >
@@ -120,7 +120,7 @@ const Sidebar = (props: any) => {
               ) : (
                 <prop.icon
                   className={classNames(
-                    "w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80",
+                    "w-6 h-8 text-2xl leading-7 float-left mr-[15px] text-center align-middle text-white bg-opacity-80",
                     whiteFontClasses
                   )}
                 />
@@ -143,7 +143,7 @@ const Sidebar = (props: any) => {
   const brand = (
     <div
       className={
-        "relative px-3.5 py-3.5 z-50 after:absolute after:bottom-0 after:right-3.5 after:h-px after:w-[calc(100% - 30px)] after:bg-gray-700"
+        "relative p-[15px] z-50 after:absolute after:bottom-0 after:right-[15px] after:h-px after:w-[calc(100% - 30px)] after:bg-gray-700"
       }
     >
       <a
@@ -152,7 +152,7 @@ const Sidebar = (props: any) => {
           "uppercase py-1 block text-white text-left text-lg font-bold leading-7 no-underline bg-transparent border-b-2 border-solid border-gray-800"
         }
       >
-        <div className={"w-7 inline-block max-h-7 ml-2.5 mr-3.5"}>
+        <div className={"w-7 inline-block max-h-7 ml-2.5 mr-[15px]"}>
           <img
             src={logo}
             alt="logo"
@@ -177,12 +177,16 @@ const Sidebar = (props: any) => {
           }}
           classes={{
             paper: classNames(
-              "z-50 boxShadow block fixed top-0 left-auto right-0 w-64 h-full text-left px-0"
+              "z-50 block fixed top-0 bottom-0 left-auto right-0 w-[260px] h-full text-left px-0 boxShadow"
             ),
           }}
         >
           {brand}
-          <div className={"relative h-[calc(100vh - 75px)] w-64 z-50"}>
+          <div
+            className={
+              "relative h-[calc(100vh - 75px)] w-[260px] z-50 overflow-auto"
+            }
+          >
             <AdminNavbarLinks />
             {links}
           </div>
@@ -203,12 +207,16 @@ const Sidebar = (props: any) => {
           open
           classes={{
             paper: classNames(
-              "border-0 boxShadow fixed top-0 bottom-0 left-0 z-50 w-64 h-full block text-left"
+              "z-50 block fixed top-0 bottom-0 left-auto right-0 w-[260px] h-full text-left px-0 boxShadow"
             ),
           }}
         >
           {brand}
-          <div className={"relative h-[calc(100vh - 75px)] w-64 z-50"}>
+          <div
+            className={
+              "relative h-[calc(100vh - 75px)] w-[260px] z-50 overflow-auto"
+            }
+          >
             {links}
           </div>
           {image !== undefined ? (

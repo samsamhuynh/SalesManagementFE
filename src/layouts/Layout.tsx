@@ -6,6 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import PerfectScrollbar from "perfect-scrollbar";
 import bgImage from "./../assets/image/sidebar.jpg";
 import logo from "./../assets/image/reactlogo.jpg";
+import CustomTable from "../components/Table";
+import { Dashboard } from "@mui/icons-material";
+import { Outlet } from "react-router-dom";
 
 const Layout = ({ ...rest }) => {
   const [image] = useState(bgImage);
@@ -78,15 +81,19 @@ const Layout = ({ ...rest }) => {
         {...rest}
       />
       <div
-        className="relative w-full max-h-full transitionLayout"
+        className="relative lg:w-[calc(100%-260px)] max-h-full transitionLayout float-right w-full"
         ref={mainPanel}
       >
         <Header handleDrawerToggle={handleDrawerToggle} {...rest} />
+
+        <div className="mt-[70px] py-[30px] px-[15px] min-h-[calc(100vh-123px)]">
+          <div className="mt-[70px]">
+            <Outlet />
+          </div>
+        </div>
       </div>
 
-      <div>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };

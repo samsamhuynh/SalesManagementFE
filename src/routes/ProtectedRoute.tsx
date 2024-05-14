@@ -16,9 +16,9 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
   const { currentUser } = useContext(AuthContext) || {};
 
-  if (!currentUser) {
-    return <Navigate to={LOGIN_PAGE} replace />;
-  }
+  // if (!currentUser) {
+  //   return <Navigate to={LOGIN_PAGE} replace />;
+  // }
 
   return children;
 };

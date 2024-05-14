@@ -16,9 +16,11 @@ import CustomInput from "../../../components/CustomInput";
 import Button from "../../../components/Button";
 
 const AdminNavbarLinks = () => {
-  const [openNotification, setOpenNotification] = useState<any>(null);
+  const [openNotification, setOpenNotification] = useState<null | HTMLElement>(
+    null
+  );
 
-  const [openProfile, setOpenProfile] = useState<any>(null);
+  const [openProfile, setOpenProfile] = useState<null | HTMLElement>(null);
 
   const handleClickNotification = (event: any) => {
     if (
@@ -35,7 +37,7 @@ const AdminNavbarLinks = () => {
     setOpenNotification(null);
   };
 
-  const handleClickProfile = (event: Event) => {
+  const handleClickProfile = (event: any) => {
     if (openProfile && openProfile.contains(event.target as HTMLElement)) {
       setOpenProfile(null);
     } else {
@@ -53,12 +55,12 @@ const AdminNavbarLinks = () => {
         className={
           "lg:inline-block flex flex-row mt-2.5 mx-5 w-[-webkit-stretch]"
         }
-        // className="w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative bg-transparent fill-available p-0 lg:mx-0"
+        // className="w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-[15px] rounded relative bg-transparent fill-available p-0 lg:mx-0"
       >
         <CustomInput
           formControlProps={{
             className: classNames(
-              "lg:m-0 lg:z-40 !my-2.5 !mx-3.5 !float-none py-px !p-px mt-10 w-3/5"
+              "lg:m-0 lg:z-40 !my-2.5 !mx-[15px] !float-none py-px !p-px mt-10 w-3/5"
             ),
           }}
           inputProps={{
@@ -99,7 +101,7 @@ const AdminNavbarLinks = () => {
           aria-haspopup="true"
           onClick={handleClickNotification}
           className={classNames(
-            "flex ml-8 w-auto sm:flex sm:mt-2.5 sm:mx-3.5 sm:mb-0 sm:w-[-webkit-fill-available]"
+            "flex ml-[30px] w-auto sm:flex sm:mt-2.5 sm:mx-[15px] sm:mb-0 sm:w-[-webkit-fill-available]"
           )}
         >
           <Notifications
@@ -119,7 +121,7 @@ const AdminNavbarLinks = () => {
 
           <span
             className={
-              "z-40 mr-3.5 leading-7 text-sm text-white font-thin lg:absolute lg:block lg:bg-danger-100 lg:top-0 lg:right-1 lg:w-4 lg:h-4 lg:rounded-full lg:text-[9px] lg:font-thin lg:leading-4 lg:text-center lg:align-middle"
+              "z-40 mr-[15px] leading-7 text-sm text-white font-thin lg:absolute lg:block lg:bg-danger-100 lg:top-0 lg:right-1 lg:w-4 lg:h-4 lg:rounded-full lg:text-[9px] lg:font-thin lg:leading-4 lg:text-center lg:align-middle"
             }
           >
             5
@@ -276,7 +278,7 @@ const AdminNavbarLinks = () => {
           aria-haspopup="true"
           onClick={handleClickProfile}
           className={classNames(
-            "flex ml-8 w-auto sm:flex sm:mt-2.5 sm:mx-3.5 sm:mb-0 sm:w-[-webkit-fill-available]"
+            "flex ml-[30px] w-auto sm:flex sm:mt-2.5 sm:mx-[15px] sm:mb-0 sm:w-[-webkit-fill-available]"
           )}
         >
           <Person
