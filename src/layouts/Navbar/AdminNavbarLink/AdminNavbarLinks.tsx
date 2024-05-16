@@ -55,7 +55,6 @@ const AdminNavbarLinks = () => {
         className={
           "lg:inline-block flex flex-row mt-2.5 mx-5 w-[-webkit-stretch]"
         }
-        // className="w-6 h-8 transition-all duration-300 ease-linear mt-2.5 mx-[15px] rounded relative bg-transparent fill-available p-0 lg:mx-0"
       >
         <CustomInput
           formControlProps={{
@@ -75,7 +74,6 @@ const AdminNavbarLinks = () => {
           <Search
             style={{
               top: "-50px !important",
-              // marginRight: "22px",
               float: "right",
               color: "gray",
               fontSize: "24px",

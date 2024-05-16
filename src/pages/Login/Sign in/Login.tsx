@@ -34,14 +34,6 @@ const Login = () => {
     });
   };
 
-  // const [createAccount, setCreateAccount] = useState<null | HTMLElement>(null);
-
-  // const handleClickSignup = (event: React.MouseEvent<HTMLElement>) => {
-  //   setCreateAccount(createAccount ? null : event.currentTarget);
-
-  //   return <Navigate to={SIGNUP_PAGE} />;
-  // };
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
