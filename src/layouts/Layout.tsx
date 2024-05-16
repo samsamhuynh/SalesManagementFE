@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import PerfectScrollbar from "perfect-scrollbar";
 import bgImage from "./../assets/image/sidebar.jpg";
 import logo from "./../assets/image/reactlogo.jpg";
+import { Outlet } from "react-router-dom";
 
 const Layout = ({ ...rest }) => {
   const [image] = useState(bgImage);
@@ -43,29 +44,6 @@ const Layout = ({ ...rest }) => {
     };
   }, [mainPanel]);
 
-  // useEffect(() => {
-  //   let ps: PerfectScrollbar | null = null;
-  //   if (navigator.platform.indexOf("Win") > -1) {
-  //     if (mainPanel.current) {
-  //       ps = new PerfectScrollbar(mainPanel.current, {
-  //         suppressScrollX: true,
-  //         suppressScrollY: false,
-  //       });
-  //       document.body.style.overflow = "hidden";
-  //     }
-  //   }
-
-  //   window.addEventListener("resize", resizeFunction);
-
-  //   // Specify how to clean up after this effect:
-  //   return () => {
-  //     if (navigator.platform.indexOf("Win") > -1 && ps) {
-  //       ps.destroy();
-  //     }
-  //     window.removeEventListener("resize", resizeFunction);
-  //   };
-  // }, [mainPanel]);
-
   return (
     <div className="relative top-0 h-screen">
       <Sidebar
@@ -78,15 +56,19 @@ const Layout = ({ ...rest }) => {
         {...rest}
       />
       <div
-        className="relative w-full max-h-full transitionLayout"
+        className="relative lg:w-[calc(100%-260px)] max-h-full transitionLayout float-right w-full"
         ref={mainPanel}
       >
         <Header handleDrawerToggle={handleDrawerToggle} {...rest} />
+
+        <div className="mt-[10px] py-[30px] px-[15px] min-h-[calc(100vh-123px)]">
+          <div className="">
+            <Outlet />
+          </div>
+        </div>
       </div>
 
-      <div>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };

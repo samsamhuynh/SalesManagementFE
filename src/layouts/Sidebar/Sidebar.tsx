@@ -103,34 +103,60 @@ const Sidebar = (props: any) => {
           >
             <ListItem
               button
-              className={classNames(
-                "w-auto transition-all duration-300 ease-linear mt-2.5 mx-3.5 rounded relative block py-2.5 px-3.5 bg-transparent" +
-                  listItemClasses
-              )}
+              sx={{
+                width: "auto",
+                transition: "all 300ms linear",
+                margin: "10px 15px 0",
+                borderRadius: "3px",
+                position: "relative",
+                display: "block",
+                padding: "10px 15px",
+                backgroundColor: "transparent",
+              }}
+              className={classNames(listItemClasses)}
             >
               {typeof prop.icon === "string" ? (
                 <Icon
-                  className={classNames(
-                    "w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80",
-                    whiteFontClasses
-                  )}
+                  sx={{
+                    width: "24px",
+                    height: "30px",
+                    fontSize: "24px",
+                    lineHeight: "30px",
+                    float: "left",
+                    marginRight: "15px",
+                    textAlign: "center",
+                    verticalAlign: "middle",
+                    color: "rgba(255, 255, 255, 0.8)",
+                  }}
+                  className={classNames(whiteFontClasses)}
                 >
                   {prop.icon}
                 </Icon>
               ) : (
                 <prop.icon
-                  className={classNames(
-                    "w-6 h-8 text-2xl leading-7 float-left mr-3.5 text-center align-middle text-white bg-opacity-80",
-                    whiteFontClasses
-                  )}
+                  style={{
+                    width: "24px",
+                    height: "30px",
+                    fontSize: "24px",
+                    lineHeight: "30px",
+                    float: "left",
+                    marginRight: "15px",
+                    textAlign: "center",
+                    verticalAlign: "middle",
+                    color: "rgba(255, 255, 255, 0.8)",
+                  }}
+                  className={classNames(whiteFontClasses)}
                 />
               )}
               <ListItemText
                 primary={prop.name}
-                className={classNames(
-                  "m-0 leading-7 text-sm text-white font-thin",
-                  whiteFontClasses
-                )}
+                sx={{
+                  margin: "0",
+                  lineHeight: "30px",
+                  fontSize: "14px",
+                  color: "white",
+                }}
+                className={classNames(whiteFontClasses)}
                 disableTypography={true}
               />
             </ListItem>
@@ -141,22 +167,16 @@ const Sidebar = (props: any) => {
   );
 
   const brand = (
-    <div
-      className={
-        "relative px-3.5 py-3.5 z-50 after:absolute after:bottom-0 after:right-3.5 after:h-px after:w-[calc(100% - 30px)] after:bg-gray-700"
-      }
-    >
+    <div className="relative p-[15px] z-50 after:absolute after:bottom-0 after:right-[15px] after:h-px after:w-[calc(100%-30px)] after:bg-gray-700">
       <a
         target="_blank"
-        className={
-          "uppercase py-1 block text-white text-left text-lg font-bold leading-7 no-underline bg-transparent border-b-2 border-solid border-gray-800"
-        }
+        className="uppercase py-1 block text-white text-left text-lg font-bold leading-7 no-underline bg-transparent hover:text-white"
       >
-        <div className={"w-7 inline-block max-h-7 ml-2.5 mr-3.5"}>
+        <div className="w-[30px] inline-block max-h-[30px] ml-2.5 mr-[15px]">
           <img
             src={logo}
             alt="logo"
-            className={"w-9 top-5 absolute align-middle border-0"}
+            className="w-[35px] top-[22px] absolute align-middle border-0"
           />
         </div>
         {logoText}
@@ -177,20 +197,18 @@ const Sidebar = (props: any) => {
           }}
           classes={{
             paper: classNames(
-              "z-50 boxShadow block fixed top-0 left-auto right-0 w-64 h-full text-left px-0"
+              "z-50 boxShadow block fixed top-0 bottom-0 left-auto right-0 w-[260px] h-screen border-0 text-left px-0"
             ),
           }}
         >
           {brand}
-          <div className={"relative h-[calc(100vh - 75px)] w-64 z-50"}>
+          <div className="relative h-[calc(100vh-75px)] w-[260px] overflow-auto z-50">
             <AdminNavbarLinks />
             {links}
           </div>
           {image !== undefined ? (
             <div
-              className={
-                "absolute z-10 h-full w-full block top-0 left-0 bg-cover bg-center after:absolute after:z-30 after:w-full after:h-full after:block after:bg-black after:opacity-80"
-              }
+              className="absolute z-10 h-full w-full block top-0 left-0 bg-cover bg-center after:absolute after:z-30 after:w-full after:h-full after:block after:bg-black after:opacity-80"
               style={{ backgroundImage: "url(" + image + ")" }}
             />
           ) : null}
@@ -203,19 +221,17 @@ const Sidebar = (props: any) => {
           open
           classes={{
             paper: classNames(
-              "border-0 boxShadow fixed top-0 bottom-0 left-0 z-50 w-64 h-full block text-left"
+              "z-50 boxShadow fixed top-0 bottom-0 left-0 w-[260px] h-full border-0 text-left"
             ),
           }}
         >
           {brand}
-          <div className={"relative h-[calc(100vh - 75px)] w-64 z-50"}>
+          <div className="relative h-[calc(100vh - 75px)] w-64 z-50">
             {links}
           </div>
           {image !== undefined ? (
             <div
-              className={
-                "absolute z-10 h-full w-full block top-0 left-0 bg-cover bg-center after:absolute after:z-30 after:w-full after:h-full after:block after:bg-black after:opacity-80"
-              }
+              className="absolute z-10 h-full w-full block top-0 left-0 bg-cover bg-center after:absolute after:z-30 after:w-full after:h-full after:block after:bg-black after:opacity-80"
               style={{ backgroundImage: "url(" + image + ")" }}
             />
           ) : null}
