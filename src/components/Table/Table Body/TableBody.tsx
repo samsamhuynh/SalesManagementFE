@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Delete, Edit } from "@mui/icons-material";
+import { Check, Delete, Edit } from "@mui/icons-material";
 
 const CustomTableBody = (props: any) => {
   const { selected, handleClick, tableData } = props;
@@ -58,28 +58,68 @@ const CustomTableBody = (props: any) => {
               role="checkbox"
               selected={selected}
               sx={{
+                position: "relative",
+                borderBottom: "1px solid #DDD",
+                cursor: "pointer",
                 height: "48px",
-                display: "table-row",
                 outline: "none",
                 verticalAlign: "middle",
               }}
             >
-              <TableCell padding="checkbox">
+              <TableCell
+                padding="checkbox"
+                key={key}
+                component="th"
+                scope="row"
+                sx={{
+                  padding: "12px 8px",
+                  verticalAlign: "middle",
+                  border: "none",
+                  lineHeight: "1.42857143",
+                  fontSize: "14px",
+                }}
+              >
                 <Checkbox
                   disableRipple
                   checked={selected}
                   onChange={handleClick}
+                  checkedIcon={
+                    <Check
+                      sx={{
+                        width: "20px",
+                        height: "20px",
+                        borderRadius: "3px",
+                        border: "1px solid rgba(0, 0, 0, .54)",
+                      }}
+                    />
+                  }
+                  icon={
+                    <Check
+                      sx={{
+                        width: "0px",
+                        height: "0px",
+                        padding: "10px",
+                        borderRadius: "3px",
+                        border: "1px solid rgba(0, 0, 0, .54)",
+                      }}
+                    />
+                  }
+                  sx={{ color: "#9c27b0 !important", padding: "13px" }}
                 />
               </TableCell>
 
               {prop.map((prop: any, key: any) => (
                 <TableCell
+                  component="th"
+                  scope="row"
+                  padding="none"
                   sx={{
-                    lineHeight: "1.42857143",
                     padding: "12px 8px",
                     verticalAlign: "middle",
-                    fontSize: "0.8125rem",
                     color: "#555555",
+                    lineHeight: "1.42857143",
+                    fontSize: "14px",
+                    fontWeight: 300,
                   }}
                   key={key}
                 >
@@ -87,7 +127,7 @@ const CustomTableBody = (props: any) => {
                 </TableCell>
               ))}
 
-              <TableCell align="right">
+              <TableCell align="right" component="th" scope="row">
                 <IconButton onClick={handleOpenMenu}>
                   <MoreVertIcon />
                 </IconButton>
@@ -102,17 +142,40 @@ const CustomTableBody = (props: any) => {
           onClose={handleCloseMenu}
           anchorOrigin={{ vertical: "top", horizontal: "left" }}
           transformOrigin={{ vertical: "top", horizontal: "right" }}
-          PaperProps={{
-            sx: { width: 140 },
+          slotProps={{
+            paper: {
+              sx: {
+                width: 140,
+                padding: "12px 8px !important",
+                verticalAlign: "middle",
+              },
+            },
           }}
         >
-          <MenuItem onClick={handleCloseMenu}>
-            <Edit sx={{ mr: 2 }} />
+          <MenuItem
+            onClick={handleCloseMenu}
+            title="Edit"
+            sx={{
+              color: "warning.main",
+              lineHeight: "1.42857143",
+              fontSize: "15px",
+              fontWeight: 400,
+            }}
+          >
+            <Edit sx={{ mr: 2, width: "20px", height: "20px" }} />
             Edit
           </MenuItem>
 
-          <MenuItem onClick={handleCloseMenu} sx={{ color: "error.main" }}>
-            <Delete sx={{ mr: 2 }} />
+          <MenuItem
+            onClick={handleCloseMenu}
+            sx={{
+              color: "error.main",
+              lineHeight: "1.42857143",
+              fontSize: "15px",
+              fontWeight: 400,
+            }}
+          >
+            <Delete sx={{ mr: 2, width: "20px", height: "20px" }} />
             Delete
           </MenuItem>
         </Popover>
@@ -126,6 +189,7 @@ const CustomTableBody = (props: any) => {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{ overflow: "visible" }}
       />
     </>
   );

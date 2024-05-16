@@ -5,6 +5,7 @@ import Checkbox from "@mui/material/Checkbox";
 import TableHead from "@mui/material/TableHead";
 import TableCell from "@mui/material/TableCell";
 import TableSortLabel from "@mui/material/TableSortLabel";
+import { Check } from "@mui/icons-material";
 
 const TableHeader = (props: any) => {
   const {
@@ -24,34 +25,68 @@ const TableHeader = (props: any) => {
   return (
     <TableHead>
       <TableRow
-        hover
         sx={{
           height: "56px",
-          display: "table-row",
           outline: "none",
           verticalAlign: "middle",
+          borderBottom: "1px solid #DDD",
         }}
       >
-        <TableCell padding="checkbox">
+        <TableCell
+          padding="checkbox"
+          sx={{
+            padding: "12px 8px",
+            verticalAlign: "middle",
+            border: "none",
+            lineHeight: "1.42857143",
+            fontSize: "14px",
+          }}
+        >
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
+            inputProps={{
+              "aria-label": "select all",
+            }}
+            checkedIcon={
+              <Check
+                sx={{
+                  width: "20px",
+                  height: "20px",
+                  borderRadius: "3px",
+                  border: "1px solid rgba(0, 0, 0, .54)",
+                }}
+              />
+            }
+            icon={
+              <Check
+                sx={{
+                  width: "0px",
+                  height: "0px",
+                  padding: "10px",
+                  borderRadius: "3px",
+                  border: "1px solid rgba(0, 0, 0, .54)",
+                }}
+              />
+            }
+            sx={{ color: "#9c27b0 !important", padding: "13px" }}
           />
         </TableCell>
 
         {headLabel.map((headCell: any) => (
           <TableCell
             key={headCell.id}
-            align={headCell.align || "left"}
+            align={headCell.numeric ? "right" : "left"}
+            padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
             sx={{
-              lineHeight: "1.42857143",
               padding: "12px 8px",
               verticalAlign: "middle",
               color: "#9c27b0",
-              fontWeight: 700,
-              fontSize: "1em",
+              lineHeight: "1.42857143",
+              fontSize: "16px",
+              fontWeight: 600,
             }}
           >
             <TableSortLabel
