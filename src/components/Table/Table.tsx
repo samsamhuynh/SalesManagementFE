@@ -23,6 +23,7 @@ const DataTable = (props: any) => {
         checkboxSelection
         disableRowSelectionOnClick
         sx={{ sx }}
+        editMode="row"
       />
     </Box>
   );

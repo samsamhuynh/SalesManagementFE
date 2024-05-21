@@ -1,89 +1,154 @@
-import { Box, Button, Card, Container, Stack, Tab, Tabs } from "@mui/material";
+import { Button, Card, Container, Stack } from "@mui/material";
 import { Add, Delete, Edit } from "@mui/icons-material";
 import DataTable from "../../components/Table";
+import { GridColDef, GridRowId } from "@mui/x-data-grid";
+import { useCallback, useMemo, useState } from "react";
+
+interface Categories {
+  id: number;
+  name: string;
+  description: string;
+  slug: string;
+}
+
+const categories: Categories[] = [
+  {
+    id: 1,
+    name: "Electronics",
+    description: "Devices and gadgets including phones, laptops, and more.",
+    slug: "electronics",
+  },
+  {
+    id: 2,
+    name: "Home Appliances",
+    description:
+      "Various appliances for home use such as refrigerators and microwaves.",
+    slug: "home-appliances",
+  },
+  {
+    id: 3,
+    name: "Books",
+    description: "A wide range of books from different genres.",
+    slug: "books",
+  },
+  {
+    id: 4,
+    name: "Fashion",
+    description: "Clothing, accessories, and footwear for all.",
+    slug: "fashion",
+  },
+  {
+    id: 5,
+    name: "Toys",
+    description: "Toys and games for children of all ages.",
+    slug: "toys",
+  },
+  {
+    id: 6,
+    name: "Groceries",
+    description: "Everyday groceries and food items.",
+    slug: "groceries",
+  },
+  {
+    id: 7,
+    name: "Health & Beauty",
+    description: "Products for health and personal care.",
+    slug: "health-beauty",
+  },
+  {
+    id: 8,
+    name: "Sports",
+    description: "Sports equipment and outdoor gear.",
+    slug: "sports",
+  },
+  {
+    id: 9,
+    name: "Automotive",
+    description: "Automotive parts and accessories.",
+    slug: "automotive",
+  },
+  {
+    id: 10,
+    name: "Furniture",
+    description: "Home and office furniture.",
+    slug: "furniture",
+  },
+];
 
 const Dashboard = () => {
-  const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 14 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 31 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 31 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 11 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  ];
+  const [rows, setRows] = useState<Categories[]>(categories);
 
-  const columns = [
-    { field: "id", headerName: "ID", width: 90 },
-    {
-      field: "firstName",
-      headerName: "First name",
-      width: 150,
-      editable: true,
-    },
-    {
-      field: "lastName",
-      headerName: "Last name",
-      width: 150,
-      editable: true,
-    },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      width: 110,
-      editable: true,
-    },
-    {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 160,
-      valueGetter: (value: any, row: any) =>
-        `${row.firstName || ""} ${row.lastName || ""}`,
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 260,
-      renderCell: () => [
-        <div className="grid grid-cols-2 gap-2 ">
-          <Button
-            variant="contained"
-            size="small"
-            sx={{
-              backgroundColor: "#ff9800",
-              "&:hover": {
-                backgroundColor: "white",
-                color: "#af2cc5",
-              },
-            }}
-          >
-            <Edit sx={{ mr: 2 }} />
-            Edit
-          </Button>
+  const handleDelete = useCallback(
+    (id: GridRowId) => () => {
+      if (window.confirm("Are you sure you want to delete?")) {
+        handleDelete(id);
+      }
 
-          <Button
-            variant="contained"
-            size="small"
-            sx={{
-              backgroundColor: "#f44336",
-              "&:hover": {
-                backgroundColor: "white",
-                color: "#af2cc5",
-              },
-            }}
-          >
-            <Delete sx={{ mr: 2 }} />
-            Delete
-          </Button>
-        </div>,
-      ],
+      setTimeout(() => {
+        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+      });
     },
-  ];
+    []
+  );
+
+  const columns = useMemo<GridColDef<Categories>[]>(
+    () => [
+      { field: "id", headerName: "ID", width: 90 },
+      { field: "name", headerName: "Name", width: 150, editable: true },
+      {
+        field: "description",
+        headerName: "Description",
+        width: 150,
+        editable: true,
+      },
+      { field: "slug", headerName: "Slug", width: 110, editable: true },
+      {
+        field: "action",
+        headerName: "Action",
+        width: 260,
+        align: "center",
+        renderCell: (params) => (
+          <div className="grid grid-cols-2 gap-2">
+            <Button
+              variant="contained"
+              size="small"
+              sx={{
+                backgroundColor: "#ff9800",
+                "&:hover": {
+                  backgroundColor: "white",
+                  color: "#af2cc5",
+                },
+              }}
+              // onClick={handleEdit(params.id)}
+            >
+              <Edit sx={{ mr: 1 }} />
+              Edit
+            </Button>
+
+            <Button
+              variant="contained"
+              size="small"
+              sx={{
+                backgroundColor: "#f44336",
+                "&:hover": {
+                  backgroundColor: "white",
+                  color: "#af2cc5",
+                },
+              }}
+              onClick={handleDelete(params.id)}
+            >
+              <Delete sx={{ mr: 1 }} />
+              Delete
+            </Button>
+          </div>
+        ),
+      },
+    ],
+    [
+      // handleEdit,
+      handleDelete,
+    ]
+  );
 
   return (
     <Container className="mx-auto px-[15px]">
@@ -124,7 +189,6 @@ const Dashboard = () => {
           columns={columns}
           rows={rows}
           loading={!rows.length}
-          sx={{}}
         ></DataTable>
       </Card>
     </Container>

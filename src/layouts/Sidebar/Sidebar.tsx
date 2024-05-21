@@ -98,7 +98,9 @@ const Sidebar = (props: any) => {
               };
             }}
             to={prop.path}
-            className={classNames(activePro + "relative block no-underline")}
+            className={classNames(
+              activePro + "relative block no-underline hover:text-white"
+            )}
             key={key}
           >
             <ListItem
