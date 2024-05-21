@@ -3,6 +3,7 @@ import { Add, Delete, Edit } from "@mui/icons-material";
 import DataTable from "../../components/Table";
 import { GridColDef, GridRowId } from "@mui/x-data-grid";
 import { useCallback, useMemo, useState } from "react";
+import FormInput from "../../components/Form";
 
 interface Categories {
   id: number;
@@ -78,6 +79,12 @@ const categories: Categories[] = [
 const Dashboard = () => {
   const [rows, setRows] = useState<Categories[]>(categories);
 
+  const [showForm, setShowForm] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowForm(true);
+  };
+
   const handleDelete = useCallback(
     (id: GridRowId) => () => {
       if (window.confirm("Are you sure you want to delete?")) {
@@ -119,7 +126,7 @@ const Dashboard = () => {
                   color: "#af2cc5",
                 },
               }}
-              // onClick={handleEdit(params.id)}
+              onClick={handleButtonClick}
             >
               <Edit sx={{ mr: 1 }} />
               Edit
@@ -144,10 +151,7 @@ const Dashboard = () => {
         ),
       },
     ],
-    [
-      // handleEdit,
-      handleDelete,
-    ]
+    [handleButtonClick, handleDelete]
   );
 
   return (
@@ -160,6 +164,7 @@ const Dashboard = () => {
         mb={5}
       >
         <Button
+          onClick={handleButtonClick}
           variant="contained"
           sx={{
             color: "white",
@@ -171,6 +176,7 @@ const Dashboard = () => {
         >
           Create Data
         </Button>
+        {showForm && <FormInput />}
       </Stack>
 
       <Card
@@ -190,6 +196,8 @@ const Dashboard = () => {
           rows={rows}
           loading={!rows.length}
         ></DataTable>
+
+        {/* <FormInput /> */}
       </Card>
     </Container>
   );
