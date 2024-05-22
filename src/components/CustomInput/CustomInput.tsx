@@ -69,7 +69,6 @@ const CustomInput = (props: any) => {
       >
         {error ? (
           <Clear
-            // className="absolute block right-0 top-5 z-20 w-6 h-6 text-center pointer-events-none text-danger-100"
             style={{
               position: "absolute",
               display: "block",

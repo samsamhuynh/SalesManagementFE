@@ -1,9 +1,24 @@
-import { Button, Card, Container, Stack } from "@mui/material";
-import { Add, Delete, Edit } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Card,
+  Checkbox,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControlLabel,
+  IconButton,
+  Stack,
+  TextField,
+} from "@mui/material";
+import { Add, Close, Delete, Edit } from "@mui/icons-material";
 import DataTable from "../../components/Table";
 import { GridColDef, GridRowId } from "@mui/x-data-grid";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import FormInput from "../../components/Form";
+// import Button from "../../components/Button";
 
 interface Categories {
   id: number;
@@ -79,24 +94,42 @@ const categories: Categories[] = [
 const Dashboard = () => {
   const [rows, setRows] = useState<Categories[]>(categories);
 
-  const [showForm, setShowForm] = useState(false);
-
-  const handleButtonClick = () => {
-    setShowForm(true);
-  };
-
-  const handleDelete = useCallback(
-    (id: GridRowId) => () => {
-      if (window.confirm("Are you sure you want to delete?")) {
-        handleDelete(id);
-      }
-
+  const handleDelete = (id: GridRowId) => {
+    if (window.confirm("Are you sure you want to delete?")) {
       setTimeout(() => {
         setRows((prevRows) => prevRows.filter((row) => row.id !== id));
       });
-    },
-    []
-  );
+    }
+  };
+
+  const [showForm, setShowForm] = useState(false);
+
+  const [title, titleChange] = useState(" ");
+
+  const [agreeTerm, agreeTermChange] = useState(true);
+
+  const handleCreate = () => {
+    titleChange("Create Product");
+    setShowForm(true);
+  };
+
+  const handleEdit = () => {
+    titleChange("Update Product");
+    setShowForm(true);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+  };
+
+  const handleClose = () => {
+    setShowForm(false);
+  };
+
+  const handleCancel = (e: any) => {
+    e.preventDefault();
+    handleClose();
+  };
 
   const columns = useMemo<GridColDef<Categories>[]>(
     () => [
@@ -126,7 +159,7 @@ const Dashboard = () => {
                   color: "#af2cc5",
                 },
               }}
-              onClick={handleButtonClick}
+              onClick={handleEdit}
             >
               <Edit sx={{ mr: 1 }} />
               Edit
@@ -142,7 +175,9 @@ const Dashboard = () => {
                   color: "#af2cc5",
                 },
               }}
-              onClick={handleDelete(params.id)}
+              onClick={() => {
+                handleDelete(params.id);
+              }}
             >
               <Delete sx={{ mr: 1 }} />
               Delete
@@ -151,7 +186,7 @@ const Dashboard = () => {
         ),
       },
     ],
-    [handleButtonClick, handleDelete]
+    [handleDelete]
   );
 
   return (
@@ -164,7 +199,7 @@ const Dashboard = () => {
         mb={5}
       >
         <Button
-          onClick={handleButtonClick}
+          onClick={handleCreate}
           variant="contained"
           sx={{
             color: "white",
@@ -176,7 +211,6 @@ const Dashboard = () => {
         >
           Create Data
         </Button>
-        {showForm && <FormInput />}
       </Stack>
 
       <Card
@@ -197,7 +231,107 @@ const Dashboard = () => {
           loading={!rows.length}
         ></DataTable>
 
-        {/* <FormInput /> */}
+        <Dialog open={showForm} onClose={handleClose} fullWidth maxWidth="md">
+          <DialogTitle>
+            {title}
+            <IconButton style={{ float: "right" }} onClick={handleClose}>
+              <Close color="action" />
+            </IconButton>
+          </DialogTitle>
+
+          <DialogContent>
+            <Box
+              name="basic"
+              autoComplete="off"
+              component="form"
+              noValidate
+              sx={{ margin: "2", letterSpacing: "2" }}
+            >
+              <FormInput onSubmit={handleSubmit}>
+                <TextField
+                  name="name"
+                  label="Product Name"
+                  // value={values.name}
+                  // error={errors.name}
+                  // onChange={handleInputChange}
+                  fullWidth
+                  margin="normal"
+                  autoFocus
+                />
+
+                <TextField
+                  name="description"
+                  label="Description"
+                  // value={values.description}
+                  // error={errors.description}
+                  // onChange={handleInputChange}
+                  fullWidth
+                  margin="normal"
+                  autoFocus
+                />
+
+                <TextField
+                  name="slug"
+                  label="Slug"
+                  // value={values.slug}
+                  // error={errors.slug}
+                  // onChange={handleInputChange}
+                  fullWidth
+                  margin="normal"
+                  autoFocus
+                />
+              </FormInput>
+
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    value="remember"
+                    checked={agreeTerm}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      agreeTermChange(e.target.checked);
+                    }}
+                    name="agreeTerm"
+                    color="success"
+                  />
+                }
+                label="I agree to the terms"
+              ></FormControlLabel>
+
+              <DialogActions>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    backgroundColor: "#ff9800",
+                    "&:hover": {
+                      backgroundColor: "white",
+                      color: "#af2cc5",
+                    },
+                  }}
+                  disabled={!agreeTerm}
+                >
+                  Save
+                </Button>
+
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    backgroundColor: "#555555",
+                    "&:hover": {
+                      backgroundColor: "white",
+                      color: "#af2cc5",
+                    },
+                  }}
+                  onClick={handleCancel}
+                >
+                  Cancel
+                </Button>
+              </DialogActions>
+            </Box>
+          </DialogContent>
+        </Dialog>
       </Card>
     </Container>
   );

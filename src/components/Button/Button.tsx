@@ -5,6 +5,8 @@ import "./../../index.scss";
 
 const RegularButton = (props: any) => {
   const {
+    variant,
+    onClick,
     color,
     round,
     children,
@@ -15,7 +17,6 @@ const RegularButton = (props: any) => {
     link,
     justIcon,
     className,
-    muiClasses,
     ...rest
   } = props;
 
@@ -333,10 +334,11 @@ const RegularButton = (props: any) => {
 
   return (
     <Button
+      variant={variant || "contained"}
+      onClick={onClick}
       color="inherit"
-      classes={muiClasses}
-      {...rest}
       className={btnClasses}
+      {...rest}
     >
       {children}
     </Button>
