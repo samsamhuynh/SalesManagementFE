@@ -1,19 +1,27 @@
 import { useState } from "react";
 import classNames from "classnames";
-import { Notifications, Person, Search } from "@mui/icons-material";
 import {
+  ChatBubbleOutline,
+  Notifications,
+  Person,
+  Search,
+} from "@mui/icons-material";
+import {
+  Badge,
   ClickAwayListener,
   Divider,
+  Grid,
   Grow,
-  Hidden,
+  IconButton,
+  InputBase,
   MenuItem,
   MenuList,
   Paper,
   Popper,
+  Link,
 } from "@mui/material";
 import "./../../../index.scss";
-import CustomInput from "../../../components/CustomInput";
-import Button from "../../../components/Button";
+import { LOGIN_PAGE } from "../../../constants";
 
 const AdminNavbarLinks = () => {
   const [openNotification, setOpenNotification] = useState<null | HTMLElement>(
@@ -50,349 +58,280 @@ const AdminNavbarLinks = () => {
   };
 
   return (
-    <div>
-      <div
-        className={
-          "lg:inline-block flex flex-row mt-2.5 mx-5 w-[-webkit-stretch]"
-        }
-      >
-        <CustomInput
-          formControlProps={{
-            className: classNames(
-              "lg:m-0 lg:z-40 !my-2.5 !mx-[15px] !float-none py-px !p-px mt-10 w-3/5"
-            ),
-          }}
-          inputProps={{
-            placeholder: "Search",
-            inputProps: {
-              "aria-label": "Search",
-            },
-          }}
+    <Grid container>
+      <Grid item>
+        <InputBase
+          placeholder="Search topics"
+          startAdornment={
+            <Search fontSize="small" sx={{ marginRight: "15px" }} />
+          }
+          sx={{ marginRight: "10px" }}
         />
+      </Grid>
 
-        <Button color="white" aria-label="edit" justIcon round>
-          <Search
-            style={{
-              top: "-50px !important",
-              float: "right",
-              color: "gray",
-              fontSize: "24px",
-              lineHeight: "30px",
-              width: "24px",
-              height: "30px",
-              marginRight: "5px",
-              marginLeft: "5px",
-              textAlign: "center",
-              verticalAlign: "middle",
-              position: "relative",
-            }}
-          />
-        </Button>
-      </div>
-
-      <div className={"inline-block"}>
-        <Button
-          color={window.innerWidth > 900 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 900}
-          simple={!(window.innerWidth > 900)}
-          aria-owns={openNotification ? "notification-menu-list-grow" : null}
+      <Grid item>
+        <IconButton
           aria-haspopup="true"
           onClick={handleClickNotification}
-          className={classNames(
-            "flex ml-[30px] w-auto sm:flex sm:mt-2.5 sm:mx-[15px] sm:mb-0 sm:w-[-webkit-fill-available]"
-          )}
+          sx={{ marginRight: "10px" }}
         >
-          <Notifications
-            style={{
-              color: "gray",
-              fontSize: "24px",
-              lineHeight: "30px",
-              width: "24px",
-              height: "30px",
-              marginRight: "15px",
-              marginLeft: "8px",
-              textAlign: "center",
-              verticalAlign: "middle",
-              position: "relative",
-            }}
-          />
+          <Badge badgeContent={4} color="secondary">
+            <Notifications fontSize="small" />
+          </Badge>
 
-          <span
-            className={
-              "z-40 mr-[15px] leading-7 text-sm text-white font-thin lg:absolute lg:block lg:bg-danger-100 lg:top-0 lg:right-1 lg:w-4 lg:h-4 lg:rounded-full lg:text-[9px] lg:font-thin lg:leading-4 lg:text-center lg:align-middle"
-            }
+          <Popper
+            open={Boolean(openNotification)}
+            anchorEl={openNotification}
+            transition
+            disablePortal
+            className={classNames({ "pointer-event-none": !openNotification })}
+            style={{ zIndex: "4", margin: "0px" }}
           >
-            5
-          </span>
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                id="notification-menu-list-grow"
+                style={{
+                  transformOrigin:
+                    placement === "bottom" ? "center top" : "center bottom",
+                }}
+              >
+                <Paper>
+                  <ClickAwayListener onClickAway={handleCloseNotification}>
+                    <MenuList role="menu">
+                      <MenuItem
+                        onClick={handleCloseNotification}
+                        style={{
+                          color: "#333",
+                          fontSize: "13px",
+                          fontWeight: "400",
+                          lineHeight: "1.4",
+                          textAlign: "left",
+                          whiteSpace: "nowrap",
+                          padding: "10px 20px",
+                          margin: "0 5px",
+                          height: "unset",
+                          minHeight: "unset",
+                          display: "block",
+                          clear: "both",
+                          borderRadius: "2px",
+                          transition: "all 150ms linear",
+                        }}
+                      >
+                        Mike John responded to your email
+                      </MenuItem>
 
-          <Hidden mdUp implementation="css">
-            <p
-              onClick={handleCloseNotification}
-              className={"m-0 leading-7 text-sm text-white font-thin"}
-            >
-              Notification
-            </p>
-          </Hidden>
-        </Button>
+                      <MenuItem
+                        onClick={handleCloseNotification}
+                        style={{
+                          color: "#333",
+                          fontSize: "13px",
+                          fontWeight: "400",
+                          lineHeight: "1.4",
+                          textAlign: "left",
+                          whiteSpace: "nowrap",
+                          padding: "10px 20px",
+                          margin: "0 5px",
+                          height: "unset",
+                          minHeight: "unset",
+                          display: "block",
+                          clear: "both",
+                          borderRadius: "2px",
+                          transition: "all 150ms linear",
+                        }}
+                      >
+                        You have 5 new tasks
+                      </MenuItem>
 
-        <Popper
-          open={Boolean(openNotification)}
-          anchorEl={openNotification}
-          transition
-          disablePortal
-          className={classNames({ "pointer-event-none": !openNotification })}
-          style={{ zIndex: "4", fontSize: "14px", margin: "0px" }}
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              id="notification-menu-list-grow"
-              style={{
-                transformOrigin:
-                  placement === "bottom" ? "center top" : "center bottom",
-              }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleCloseNotification}>
-                  <MenuList role="menu">
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      style={{
-                        color: "#333",
-                        fontSize: "13px",
-                        fontWeight: "400",
-                        lineHeight: "1.4",
-                        whiteSpace: "nowrap",
-                        padding: "10px 20px",
-                        margin: "0 5px",
-                        height: "unset",
-                        minHeight: "unset",
-                        display: "block",
-                        clear: "both",
-                        borderRadius: "2px",
-                        transition: "all 150ms linear",
-                      }}
-                    >
-                      Mike John responded to your email
-                    </MenuItem>
+                      <MenuItem
+                        onClick={handleCloseNotification}
+                        style={{
+                          color: "#333",
+                          fontSize: "13px",
+                          fontWeight: "400",
+                          lineHeight: "1.4",
+                          textAlign: "left",
+                          whiteSpace: "nowrap",
+                          padding: "10px 20px",
+                          margin: "0 5px",
+                          height: "unset",
+                          minHeight: "unset",
+                          display: "block",
+                          clear: "both",
+                          borderRadius: "2px",
+                          transition: "all 150ms linear",
+                        }}
+                      >
+                        You{"'"}re now friend with Andrew
+                      </MenuItem>
 
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      style={{
-                        color: "#333",
-                        fontSize: "13px",
-                        fontWeight: "400",
-                        lineHeight: "1.4",
-                        whiteSpace: "nowrap",
-                        padding: "10px 20px",
-                        margin: "0 5px",
-                        height: "unset",
-                        minHeight: "unset",
-                        display: "block",
-                        clear: "both",
-                        borderRadius: "2px",
-                        transition: "all 150ms linear",
-                      }}
-                    >
-                      You have 5 new tasks
-                    </MenuItem>
+                      <MenuItem
+                        onClick={handleCloseNotification}
+                        style={{
+                          color: "#333",
+                          fontSize: "13px",
+                          fontWeight: "400",
+                          lineHeight: "1.4",
+                          textAlign: "left",
+                          whiteSpace: "nowrap",
+                          padding: "10px 20px",
+                          margin: "0 5px",
+                          height: "unset",
+                          minHeight: "unset",
+                          display: "block",
+                          clear: "both",
+                          borderRadius: "2px",
+                          transition: "all 150ms linear",
+                        }}
+                      >
+                        Another Notification
+                      </MenuItem>
 
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      style={{
-                        color: "#333",
-                        fontSize: "13px",
-                        fontWeight: "400",
-                        lineHeight: "1.4",
-                        whiteSpace: "nowrap",
-                        padding: "10px 20px",
-                        margin: "0 5px",
-                        height: "unset",
-                        minHeight: "unset",
-                        display: "block",
-                        clear: "both",
-                        borderRadius: "2px",
-                        transition: "all 150ms linear",
-                      }}
-                    >
-                      You{"'"}re now friend with Andrew
-                    </MenuItem>
+                      <MenuItem
+                        onClick={handleCloseNotification}
+                        style={{
+                          color: "#333",
+                          fontSize: "13px",
+                          fontWeight: "400",
+                          lineHeight: "1.4",
+                          textAlign: "left",
+                          whiteSpace: "nowrap",
+                          padding: "10px 20px",
+                          margin: "0 5px",
+                          height: "unset",
+                          minHeight: "unset",
+                          display: "block",
+                          clear: "both",
+                          borderRadius: "2px",
+                          transition: "all 150ms linear",
+                        }}
+                      >
+                        Another One
+                      </MenuItem>
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+        </IconButton>
 
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      style={{
-                        color: "#333",
-                        fontSize: "13px",
-                        fontWeight: "400",
-                        lineHeight: "1.4",
-                        whiteSpace: "nowrap",
-                        padding: "10px 20px",
-                        margin: "0 5px",
-                        height: "unset",
-                        minHeight: "unset",
-                        display: "block",
-                        clear: "both",
-                        borderRadius: "2px",
-                        transition: "all 150ms linear",
-                      }}
-                    >
-                      Another Notification
-                    </MenuItem>
+        <IconButton sx={{ marginRight: "10px" }}>
+          <Badge badgeContent={3} color="primary">
+            <ChatBubbleOutline fontSize="small" />
+          </Badge>
+        </IconButton>
 
-                    <MenuItem
-                      onClick={handleCloseNotification}
-                      style={{
-                        color: "#333",
-                        fontSize: "13px",
-                        fontWeight: "400",
-                        lineHeight: "1.4",
-                        whiteSpace: "nowrap",
-                        padding: "10px 20px",
-                        margin: "0 5px",
-                        height: "unset",
-                        minHeight: "unset",
-                        display: "block",
-                        clear: "both",
-                        borderRadius: "2px",
-                        transition: "all 150ms linear",
-                      }}
-                    >
-                      Another One
-                    </MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-      </div>
-
-      <div className={"inline-block"}>
-        <Button
-          color={window.innerWidth > 900 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 900}
-          simple={!(window.innerWidth > 900)}
-          aria-owns={openProfile ? "profile-menu-list-grow" : null}
+        <IconButton
           aria-haspopup="true"
           onClick={handleClickProfile}
-          className={classNames(
-            "flex ml-[30px] w-auto sm:flex sm:mt-2.5 sm:mx-[15px] sm:mb-0 sm:w-[-webkit-fill-available]"
-          )}
+          sx={{ marginRight: "10px" }}
         >
-          <Person
-            style={{
-              color: "gray",
-              fontSize: "24px",
-              lineHeight: "30px",
-              width: "24px",
-              height: "30px",
-              marginRight: "15px",
-              marginLeft: "8px",
-              textAlign: "center",
-              verticalAlign: "middle",
-              position: "relative",
-            }}
-          />
+          <Person fontSize="small" />
 
-          <Hidden mdUp implementation="css">
-            <p className={"m-0 leading-7 text-sm text-white font-thin"}>
-              Profile
-            </p>
-          </Hidden>
-        </Button>
+          <Popper
+            open={Boolean(openProfile)}
+            anchorEl={openProfile}
+            transition
+            disablePortal
+            className={classNames({ "pointer-event-none": !openProfile })}
+            style={{ zIndex: "4", paddingRight: "10px" }}
+          >
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                id="profile-menu-list-grow"
+                style={{
+                  transformOrigin:
+                    placement === "bottom" ? "right top" : "right bottom",
+                }}
+              >
+                <Paper>
+                  <ClickAwayListener onClickAway={handleCloseProfile}>
+                    <MenuList role="menu">
+                      <MenuItem
+                        onClick={handleCloseProfile}
+                        style={{
+                          color: "#333",
+                          fontSize: "13px",
+                          fontWeight: "400",
+                          lineHeight: "1.4",
+                          textAlign: "center",
+                          whiteSpace: "nowrap",
+                          padding: "10px 20px",
+                          margin: "0 5px",
+                          height: "unset",
+                          minHeight: "unset",
+                          display: "block",
+                          clear: "both",
+                          borderRadius: "2px",
+                          transition: "all 150ms linear",
+                        }}
+                      >
+                        Profile
+                      </MenuItem>
 
-        <Popper
-          open={Boolean(openProfile)}
-          anchorEl={openProfile}
-          transition
-          disablePortal
-          className={classNames({ "pointer-event-none": !openProfile })}
-          style={{ zIndex: "4", fontSize: "14px", margin: "0px" }}
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              id="profile-menu-list-grow"
-              style={{
-                transformOrigin:
-                  placement === "bottom" ? "center top" : "center bottom",
-              }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleCloseProfile}>
-                  <MenuList role="menu">
-                    <MenuItem
-                      onClick={handleCloseProfile}
-                      style={{
-                        color: "#333",
-                        fontSize: "13px",
-                        fontWeight: "400",
-                        lineHeight: "1.4",
-                        whiteSpace: "nowrap",
-                        padding: "10px 20px",
-                        margin: "0 5px",
-                        height: "unset",
-                        minHeight: "unset",
-                        display: "block",
-                        clear: "both",
-                        borderRadius: "2px",
-                        transition: "all 150ms linear",
-                      }}
-                    >
-                      Profile
-                    </MenuItem>
+                      <MenuItem
+                        onClick={handleCloseProfile}
+                        style={{
+                          color: "#333",
+                          fontSize: "13px",
+                          fontWeight: "400",
+                          lineHeight: "1.4",
+                          textAlign: "center",
+                          whiteSpace: "nowrap",
+                          padding: "10px 20px",
+                          margin: "0 5px",
+                          height: "unset",
+                          minHeight: "unset",
+                          display: "block",
+                          clear: "both",
+                          borderRadius: "2px",
+                          transition: "all 150ms linear",
+                        }}
+                      >
+                        Settings
+                      </MenuItem>
 
-                    <MenuItem
-                      onClick={handleCloseProfile}
-                      style={{
-                        color: "#333",
-                        fontSize: "13px",
-                        fontWeight: "400",
-                        lineHeight: "1.4",
-                        whiteSpace: "nowrap",
-                        padding: "10px 20px",
-                        margin: "0 5px",
-                        height: "unset",
-                        minHeight: "unset",
-                        display: "block",
-                        clear: "both",
-                        borderRadius: "2px",
-                        transition: "all 150ms linear",
-                      }}
-                    >
-                      Settings
-                    </MenuItem>
+                      <Divider light />
 
-                    <Divider light />
-
-                    <MenuItem
-                      onClick={handleCloseProfile}
-                      style={{
-                        color: "#333",
-                        fontSize: "13px",
-                        fontWeight: "400",
-                        lineHeight: "1.4",
-                        whiteSpace: "nowrap",
-                        padding: "10px 20px",
-                        margin: "0 5px",
-                        height: "unset",
-                        minHeight: "unset",
-                        display: "block",
-                        clear: "both",
-                        borderRadius: "2px",
-                        transition: "all 150ms linear",
-                      }}
-                    >
-                      Logout
-                    </MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-      </div>
-    </div>
+                      <MenuItem
+                        onClick={handleCloseProfile}
+                        style={{
+                          textAlign: "center",
+                          whiteSpace: "nowrap",
+                          padding: "10px 20px",
+                          margin: "0 5px",
+                          height: "unset",
+                          minHeight: "unset",
+                          display: "block",
+                          clear: "both",
+                          borderRadius: "2px",
+                          transition: "all 150ms linear",
+                        }}
+                      >
+                        <Link
+                          sx={{
+                            textDecoration: "none",
+                            color: "#333",
+                            fontSize: "13px",
+                            fontWeight: "400",
+                            lineHeight: "1.4",
+                          }}
+                          href={LOGIN_PAGE}
+                        >
+                          Logout
+                        </Link>
+                      </MenuItem>
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+        </IconButton>
+      </Grid>
+    </Grid>
   );
 };
 

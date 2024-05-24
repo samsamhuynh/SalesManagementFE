@@ -205,7 +205,6 @@ const Sidebar = (props: any) => {
         >
           {brand}
           <div className="relative h-[calc(100vh-75px)] w-[260px] overflow-auto z-50">
-            <AdminNavbarLinks />
             {links}
           </div>
           {image !== undefined ? (

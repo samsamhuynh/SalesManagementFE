@@ -1,24 +1,9 @@
-import {
-  Box,
-  Button,
-  Card,
-  Checkbox,
-  Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  FormControlLabel,
-  IconButton,
-  Stack,
-  TextField,
-} from "@mui/material";
-import { Add, Close, Delete, Edit } from "@mui/icons-material";
+import { Button, Card, Container, Stack } from "@mui/material";
+import { Add, Delete, Edit } from "@mui/icons-material";
 import DataTable from "../../components/Table";
 import { GridColDef, GridRowId } from "@mui/x-data-grid";
 import { useMemo, useState } from "react";
 import FormInput from "../../components/Form";
-// import Button from "../../components/Button";
 
 interface Categories {
   id: number;
@@ -104,31 +89,12 @@ const Dashboard = () => {
 
   const [showForm, setShowForm] = useState(false);
 
-  const [title, titleChange] = useState(" ");
-
-  const [agreeTerm, agreeTermChange] = useState(true);
-
   const handleCreate = () => {
-    titleChange("Create Product");
     setShowForm(true);
   };
 
   const handleEdit = () => {
-    titleChange("Update Product");
     setShowForm(true);
-  };
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-  };
-
-  const handleClose = () => {
-    setShowForm(false);
-  };
-
-  const handleCancel = (e: any) => {
-    e.preventDefault();
-    handleClose();
   };
 
   const columns = useMemo<GridColDef<Categories>[]>(
@@ -155,8 +121,7 @@ const Dashboard = () => {
               sx={{
                 backgroundColor: "#ff9800",
                 "&:hover": {
-                  backgroundColor: "white",
-                  color: "#af2cc5",
+                  backgroundColor: "#fb8c00",
                 },
               }}
               onClick={handleEdit}
@@ -171,8 +136,7 @@ const Dashboard = () => {
               sx={{
                 backgroundColor: "#f44336",
                 "&:hover": {
-                  backgroundColor: "white",
-                  color: "#af2cc5",
+                  backgroundColor: "#e53935",
                 },
               }}
               onClick={() => {
@@ -197,15 +161,18 @@ const Dashboard = () => {
         alignItems="center"
         justifyContent="space-between"
         mb={5}
+        sx={{ float: "right" }}
       >
         <Button
           onClick={handleCreate}
           variant="contained"
           sx={{
-            color: "white",
             fontSize: "14px",
             fontWeight: 300,
-            backgroundColor: "black",
+            backgroundColor: "#333",
+            "&:hover": {
+              backgroundColor: "black",
+            },
           }}
           startIcon={<Add sx={{ width: "20px", height: "20px" }} />}
         >
@@ -230,108 +197,7 @@ const Dashboard = () => {
           rows={rows}
           loading={!rows.length}
         ></DataTable>
-
-        <Dialog open={showForm} onClose={handleClose} fullWidth maxWidth="md">
-          <DialogTitle>
-            {title}
-            <IconButton style={{ float: "right" }} onClick={handleClose}>
-              <Close color="action" />
-            </IconButton>
-          </DialogTitle>
-
-          <DialogContent>
-            <Box
-              name="basic"
-              autoComplete="off"
-              component="form"
-              noValidate
-              sx={{ margin: "2", letterSpacing: "2" }}
-            >
-              <FormInput onSubmit={handleSubmit}>
-                <TextField
-                  name="name"
-                  label="Product Name"
-                  // value={values.name}
-                  // error={errors.name}
-                  // onChange={handleInputChange}
-                  fullWidth
-                  margin="normal"
-                  autoFocus
-                />
-
-                <TextField
-                  name="description"
-                  label="Description"
-                  // value={values.description}
-                  // error={errors.description}
-                  // onChange={handleInputChange}
-                  fullWidth
-                  margin="normal"
-                  autoFocus
-                />
-
-                <TextField
-                  name="slug"
-                  label="Slug"
-                  // value={values.slug}
-                  // error={errors.slug}
-                  // onChange={handleInputChange}
-                  fullWidth
-                  margin="normal"
-                  autoFocus
-                />
-              </FormInput>
-
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    value="remember"
-                    checked={agreeTerm}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      agreeTermChange(e.target.checked);
-                    }}
-                    name="agreeTerm"
-                    color="success"
-                  />
-                }
-                label="I agree to the terms"
-              ></FormControlLabel>
-
-              <DialogActions>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  size="large"
-                  sx={{
-                    backgroundColor: "#ff9800",
-                    "&:hover": {
-                      backgroundColor: "white",
-                      color: "#af2cc5",
-                    },
-                  }}
-                  disabled={!agreeTerm}
-                >
-                  Save
-                </Button>
-
-                <Button
-                  variant="contained"
-                  size="large"
-                  sx={{
-                    backgroundColor: "#555555",
-                    "&:hover": {
-                      backgroundColor: "white",
-                      color: "#af2cc5",
-                    },
-                  }}
-                  onClick={handleCancel}
-                >
-                  Cancel
-                </Button>
-              </DialogActions>
-            </Box>
-          </DialogContent>
-        </Dialog>
+        <FormInput open={showForm} onClose={() => setShowForm(false)} />
       </Card>
     </Container>
   );

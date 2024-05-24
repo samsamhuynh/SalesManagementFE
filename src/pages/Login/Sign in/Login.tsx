@@ -54,6 +54,7 @@ const Login = () => {
 
         <Box onSubmit={handleSubmit} component="form" noValidate sx={{ mt: 1 }}>
           <TextField
+            variant="outlined"
             id="email"
             name="email"
             label="Email Address"
@@ -62,7 +63,7 @@ const Login = () => {
             autoFocus
             fullWidth
             margin="normal"
-          ></TextField>
+          />
 
           <FormControl fullWidth margin="normal" required>
             <InputLabel htmlFor="outlined-adornment-password">

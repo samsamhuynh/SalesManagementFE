@@ -48,6 +48,7 @@ const ForgotPassword = () => {
 
         <Box onSubmit={handleSubmit} component="form" noValidate sx={{ mt: 3 }}>
           <TextField
+            variant="outlined"
             id="email"
             name="email"
             label="Email Address"

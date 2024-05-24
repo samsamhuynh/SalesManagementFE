@@ -23,6 +23,8 @@ import { LOGIN_PAGE } from "../../../constants";
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const [agreeTerm, agreeTermChange] = useState(true);
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -58,6 +60,7 @@ const SignUp = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                variant="outlined"
                 id="userName"
                 name="userName"
                 label="User Name"
@@ -70,6 +73,7 @@ const SignUp = () => {
 
             <Grid item xs={12} sm={6}>
               <TextField
+                variant="outlined"
                 id="firstName"
                 name="firstName"
                 label="First Name"
@@ -81,6 +85,7 @@ const SignUp = () => {
 
             <Grid item xs={12} sm={6}>
               <TextField
+                variant="outlined"
                 id="lastName"
                 name="lastName"
                 label="Last Name"
@@ -92,6 +97,7 @@ const SignUp = () => {
 
             <Grid item xs={12}>
               <TextField
+                variant="outlined"
                 id="email"
                 name="email"
                 label="Email Address"
@@ -104,6 +110,7 @@ const SignUp = () => {
 
             <Grid item xs={12}>
               <TextField
+                variant="outlined"
                 id="phoneNumber"
                 name="phoneNumber"
                 label="Phone Number"
@@ -166,7 +173,17 @@ const SignUp = () => {
           </Grid>
 
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={
+              <Checkbox
+                value="remember"
+                checked={agreeTerm}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  agreeTermChange(e.target.checked);
+                }}
+                name="agreeTerm"
+                color="success"
+              />
+            }
             label="I agree to privacy policy & terms"
           ></FormControlLabel>
 
@@ -175,6 +192,7 @@ const SignUp = () => {
             variant="contained"
             fullWidth
             sx={{ mt: 3, mb: 2 }}
+            disabled={!agreeTerm}
           >
             Sign Up
           </Button>
