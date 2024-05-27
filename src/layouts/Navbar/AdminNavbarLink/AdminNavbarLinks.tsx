@@ -75,8 +75,8 @@ const AdminNavbarLinks = () => {
           onClick={handleClickNotification}
           sx={{ marginRight: "10px" }}
         >
-          <Badge badgeContent={4} color="secondary">
-            <Notifications fontSize="small" />
+          <Badge badgeContent={4} color="success">
+            <Notifications fontSize="medium" />
           </Badge>
 
           <Popper
@@ -217,8 +217,8 @@ const AdminNavbarLinks = () => {
         </IconButton>
 
         <IconButton sx={{ marginRight: "10px" }}>
-          <Badge badgeContent={3} color="primary">
-            <ChatBubbleOutline fontSize="small" />
+          <Badge badgeContent={3} color="success">
+            <ChatBubbleOutline fontSize="medium" />
           </Badge>
         </IconButton>
 
@@ -227,7 +227,7 @@ const AdminNavbarLinks = () => {
           onClick={handleClickProfile}
           sx={{ marginRight: "10px" }}
         >
-          <Person fontSize="small" />
+          <Person fontSize="medium" />
 
           <Popper
             open={Boolean(openProfile)}

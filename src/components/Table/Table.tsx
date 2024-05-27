@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 
 const DataTable = (props: any) => {
-  const { rows, columns, loading, sx } = props;
+  const { rows, columns, sx } = props;
 
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 5,
@@ -11,11 +11,11 @@ const DataTable = (props: any) => {
   });
 
   return (
-    <Box>
+    <Box sx={{ height: { rows }, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
-        loading={loading}
+        rowHeight={38}
         rowCount={rows.length}
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}

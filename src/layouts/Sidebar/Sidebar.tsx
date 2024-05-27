@@ -17,7 +17,6 @@ import {
   Notifications,
   Person,
 } from "@mui/icons-material";
-import AdminNavbarLinks from "../Navbar/AdminNavbarLink";
 import classNames from "classnames";
 
 const Sidebar = (props: any) => {

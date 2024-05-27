@@ -1,19 +1,5 @@
-import {
-  ChatBubbleOutline,
-  Menu,
-  Notifications,
-  PowerSettingsNew,
-  Search,
-} from "@mui/icons-material";
-import {
-  AppBar,
-  Badge,
-  Grid,
-  Hidden,
-  IconButton,
-  InputBase,
-  Toolbar,
-} from "@mui/material";
+import { Menu } from "@mui/icons-material";
+import { AppBar, Grid, Hidden, IconButton, Toolbar } from "@mui/material";
 import PropTypes from "prop-types";
 import "./../../index.scss";
 import AdminNavbarLinks from "./AdminNavbarLink";

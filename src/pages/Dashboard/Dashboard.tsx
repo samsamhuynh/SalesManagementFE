@@ -1,9 +1,10 @@
-import { Button, Card, Container, Stack } from "@mui/material";
+import { Button, Card, Container, Grid, Stack } from "@mui/material";
 import { Add, Delete, Edit } from "@mui/icons-material";
 import DataTable from "../../components/Table";
 import { GridColDef, GridRowId } from "@mui/x-data-grid";
 import { useMemo, useState } from "react";
 import FormInput from "../../components/Form";
+import Swal from "sweetalert2";
 
 interface Categories {
   id: number;
@@ -80,73 +81,85 @@ const Dashboard = () => {
   const [rows, setRows] = useState<Categories[]>(categories);
 
   const handleDelete = (id: GridRowId) => {
-    if (window.confirm("Are you sure you want to delete?")) {
-      setTimeout(() => {
-        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
-      });
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+
+        setTimeout(() => {
+          setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+        });
+      }
+    });
   };
 
   const [showForm, setShowForm] = useState(false);
 
-  const handleCreate = () => {
-    setShowForm(true);
-  };
-
-  const handleEdit = () => {
-    setShowForm(true);
-  };
-
   const columns = useMemo<GridColDef<Categories>[]>(
     () => [
       { field: "id", headerName: "ID", width: 90 },
-      { field: "name", headerName: "Name", width: 150, editable: true },
+      { field: "name", headerName: "Product Name", width: 150, editable: true },
       {
         field: "description",
         headerName: "Description",
-        width: 150,
+        width: 200,
         editable: true,
       },
-      { field: "slug", headerName: "Slug", width: 110, editable: true },
+      { field: "slug", headerName: "Slug", width: 150, editable: true },
       {
         field: "action",
         headerName: "Action",
-        width: 260,
+        width: 216,
         align: "center",
         renderCell: (params) => (
-          <div className="grid grid-cols-2 gap-2">
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                backgroundColor: "#ff9800",
-                "&:hover": {
-                  backgroundColor: "#fb8c00",
-                },
-              }}
-              onClick={handleEdit}
-            >
-              <Edit sx={{ mr: 1 }} />
-              Edit
-            </Button>
+          <Grid container gap={1}>
+            <Grid item>
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  backgroundColor: "#ff9800",
+                  "&:hover": {
+                    backgroundColor: "#fb8c00",
+                  },
+                }}
+                onClick={() => setShowForm(true)}
+              >
+                <Edit sx={{ mr: 1 }} />
+                <span>Edit</span>
+              </Button>
+            </Grid>
 
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                backgroundColor: "#f44336",
-                "&:hover": {
-                  backgroundColor: "#e53935",
-                },
-              }}
-              onClick={() => {
-                handleDelete(params.id);
-              }}
-            >
-              <Delete sx={{ mr: 1 }} />
-              Delete
-            </Button>
-          </div>
+            <Grid item>
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  backgroundColor: "#f44336",
+                  "&:hover": {
+                    backgroundColor: "#e53935",
+                  },
+                }}
+                onClick={() => {
+                  handleDelete(params.id);
+                }}
+              >
+                <Delete sx={{ mr: 1 }} />
+                <span>Delete</span>
+              </Button>
+            </Grid>
+          </Grid>
         ),
       },
     ],
@@ -160,11 +173,10 @@ const Dashboard = () => {
         direction="row"
         alignItems="center"
         justifyContent="space-between"
-        mb={5}
-        sx={{ float: "right" }}
+        mb={2}
       >
         <Button
-          onClick={handleCreate}
+          onClick={() => setShowForm(true)}
           variant="contained"
           sx={{
             fontSize: "14px",
@@ -197,6 +209,7 @@ const Dashboard = () => {
           rows={rows}
           loading={!rows.length}
         ></DataTable>
+
         <FormInput open={showForm} onClose={() => setShowForm(false)} />
       </Card>
     </Container>

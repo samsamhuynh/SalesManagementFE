@@ -62,9 +62,7 @@ const Layout = ({ ...rest }) => {
         <Header handleDrawerToggle={handleDrawerToggle} {...rest} />
 
         <div className="mt-[70px] py-[30px] px-[15px] min-h-[calc(100vh-123px)]">
-          <div className="mt-[30px]">
-            <Outlet />
-          </div>
+          <Outlet />
         </div>
       </div>
 
